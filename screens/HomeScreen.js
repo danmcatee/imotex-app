@@ -7,21 +7,49 @@ import {
   Text,
   TouchableOpacity,
   View,
+  TextInput,
+  Button,
 } from 'react-native';
 import { WebBrowser } from 'expo';
+import UserStore from '../UserStore';
+import { observer } from 'mobx-react';
 
 import { MonoText } from '../components/StyledText';
 
+const initialState = {
+  username: '',
+  password: '',
+  email: '',
+};
+
+@observer
 export default class HomeScreen extends React.Component {
+  state = initialState;
+
   static navigationOptions = {
     header: null,
   };
 
+  onChangeText(key, value) {
+    this.setState({
+      [key]: value,
+    });
+  }
+
+  addUser() {
+    UserStore.addUser(this.state);
+    this.setState(initialState);
+  }
+
   render() {
+    const { users } = UserStore;
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
+        <ScrollView
+          style={styles.container}
+          contentContainerStyle={styles.contentContainer}
+        >
+          {/* <View style={styles.welcomeContainer}>
             <Image
               source={
                 __DEV__
@@ -37,8 +65,12 @@ export default class HomeScreen extends React.Component {
 
             <Text style={styles.getStartedText}>Get started by opening</Text>
 
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
+            <View
+              style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
+            >
+              <MonoText style={styles.codeHighlightText}>
+                screens/HomeScreen.js
+              </MonoText>
             </View>
 
             <Text style={styles.getStartedText}>
@@ -47,19 +79,53 @@ export default class HomeScreen extends React.Component {
           </View>
 
           <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
+            <TouchableOpacity
+              onPress={this._handleHelpPress}
+              style={styles.helpLink}
+            >
+              <Text style={styles.helpLinkText}>
+                Help, it didn’t automatically reload!
+              </Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
+          <TextInput
+            value={this.state.username}
+            style={styles.input}
+            onChangeText={value => this.onChangeText('username', value)}
+          />
+          <TextInput
+            value={this.state.password}
+            style={styles.input}
+            onChangeText={value => this.onChangeText('password', value)}
+          />
+          <TextInput
+            value={this.state.email}
+            style={styles.input}
+            onChangeText={value => this.onChangeText('email', value)}
+          />
+          <Button title="Add User" onPress={this.addUser.bind(this)} />
+          {users.map((user, index) => (
+            <View key={index}>
+              <Text>{user.username}</Text>
+              <Text>{user.password}</Text>
+              <Text>{user.email}</Text>
+            </View>
+          ))}
         </ScrollView>
 
-        <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
+        {/* <View style={styles.tabBarInfoContainer}>
+          <Text style={styles.tabBarInfoText}>
+            This is a tab bar. You can edit it in:
+          </Text>
 
-          <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-            <MonoText style={styles.codeHighlightText}>navigation/MainTabNavigator.js</MonoText>
+          <View
+            style={[styles.codeHighlightContainer, styles.navigationFilename]}
+          >
+            <MonoText style={styles.codeHighlightText}>
+              navigation/MainTabNavigator.js
+            </MonoText>
           </View>
-        </View>
+        </View> */}
       </View>
     );
   }
@@ -74,8 +140,8 @@ export default class HomeScreen extends React.Component {
 
       return (
         <Text style={styles.developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use useful development
-          tools. {learnMoreButton}
+          Development mode is enabled, your app will be slower but you can use
+          useful development tools. {learnMoreButton}
         </Text>
       );
     } else {
@@ -88,7 +154,9 @@ export default class HomeScreen extends React.Component {
   }
 
   _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
+    WebBrowser.openBrowserAsync(
+      'https://docs.expo.io/versions/latest/guides/development-mode'
+    );
   };
 
   _handleHelpPress = () => {
@@ -99,6 +167,11 @@ export default class HomeScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  input: {
+    height: 50,
+    backgroundColor: '#ededed',
+    marginVertical: 10,
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
