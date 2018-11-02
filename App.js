@@ -4,7 +4,7 @@ import { AppLoading, Asset, Font, Icon } from 'expo';
 
 import { images } from './constants/Images';
 import { cacheImages } from './utils/cacheImages';
-import Box from './components/Box';
+import Box from './commons/Box';
 import Navigation from './screens';
 
 export default class App extends React.Component {

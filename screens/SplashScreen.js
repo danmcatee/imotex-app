@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet } from 'react-native';
 
-import Box from '../components/Box';
+import Box from '../commons/Box';
 import { images } from '../constants/Images';
 
 class SplashScreen extends Component {

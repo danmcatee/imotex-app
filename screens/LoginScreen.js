@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text } from 'react-native';
 
-import Box from '../components/Box';
+import Box from '../commons/Box';
 
 class LoginScreen extends Component {
   state = {};
