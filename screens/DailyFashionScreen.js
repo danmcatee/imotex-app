@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 
 import Box from '../commons/Box';
 
-class SettingsScreen extends Component {
+class DailyFashionScreen extends Component {
   state = {};
   render() {
     return (
@@ -14,4 +14,4 @@ class SettingsScreen extends Component {
   }
 }
 
-export default SettingsScreen;
+export default DailyFashionScreen;
