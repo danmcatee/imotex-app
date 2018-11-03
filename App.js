@@ -1,7 +1,8 @@
 import React from 'react';
 import { Platform, StatusBar, View, ActivityIndicator } from 'react-native';
-import { AppLoading, Asset, Font, Icon } from 'expo';
+import { Provider } from 'mobx-react/native';
 
+import { store } from './models';
 import { images } from './constants/Images';
 import { cacheImages } from './utils/cacheImages';
 import Box from './commons/Box';
@@ -31,6 +32,10 @@ export default class App extends React.Component {
         </Box>
       );
     }
-    return <Navigation />;
+    return (
+      <Provider {...store}>
+        <Navigation />
+      </Provider>
+    );
   }
 }
