@@ -4,7 +4,12 @@ import {
   createStackNavigator,
   createSwitchNavigator,
 } from 'react-navigation';
+import { Image } from 'react-native';
+
 import { NavigationService } from '../api/NavigationService';
+import theme from '../constants/Theme';
+
+import { tabBarIcons } from '../constants/Images';
 
 const AuthNavigator = createStackNavigator(
   {
@@ -19,15 +24,58 @@ const AuthNavigator = createStackNavigator(
   }
 );
 
-const TabNavigator = createBottomTabNavigator({
-  Home: {
-    getScreen: () => require('./HomeScreen').default,
+const TabNavigator = createBottomTabNavigator(
+  {
+    Home: {
+      getScreen: () => require('./HomeScreen').default,
+    },
+    Brands: {
+      getScreen: () => require('./BrandsScreen').default,
+    },
+    Service: {
+      getScreen: () => require('./ServiceScreen').default,
+    },
+    Favorites: {
+      getScreen: () => require('./FavoritesScreen').default,
+    },
+    Settings: {
+      getScreen: () => require('./SettingsScreen').default,
+    },
   },
-});
+  {
+    // tabBarComponent: props => <TabBar {...props} />,
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused }) => {
+        const { routeName } = navigation.state;
+        return (
+          <Image
+            style={{ height: 25, width: 25 }}
+            source={tabBarIcons[focused ? 'active' : 'inactive'][routeName]}
+          />
+        );
+      },
+    }),
+    tabBarOptions: {
+      showLabel: false,
+      style: {
+        backgroundColor: theme.colors.grey,
+      },
+    },
+  }
+);
 
-const MainNavigator = createStackNavigator({
-  Tab: TabNavigator,
-});
+const MainNavigator = createStackNavigator(
+  {
+    Tab: TabNavigator,
+  },
+  {
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: theme.colors.grey,
+      },
+    },
+  }
+);
 
 const AppNavigator = createSwitchNavigator(
   {
