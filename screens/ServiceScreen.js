@@ -8,7 +8,7 @@ class ServiceScreen extends Component {
   render() {
     return (
       <Box>
-        <Text>HomeScreen</Text>
+        <Text>ServiceScreen</Text>
       </Box>
     );
   }

@@ -8,7 +8,7 @@ class FavoritesScreen extends Component {
   render() {
     return (
       <Box>
-        <Text>HomeScreen</Text>
+        <Text>FavoritesScreen</Text>
       </Box>
     );
   }

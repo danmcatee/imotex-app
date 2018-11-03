@@ -8,7 +8,7 @@ class SettingsScreen extends Component {
   render() {
     return (
       <Box>
-        <Text>HomeScreen</Text>
+        <Text>SettingsScreen</Text>
       </Box>
     );
   }

@@ -8,7 +8,7 @@ class BrandsScreen extends Component {
   render() {
     return (
       <Box>
-        <Text>HomeScreen</Text>
+        <Text>BrandsScreen</Text>
       </Box>
     );
   }

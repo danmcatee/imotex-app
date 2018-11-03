@@ -8,7 +8,7 @@ class DailyFashionScreen extends Component {
   render() {
     return (
       <Box>
-        <Text>HomeScreen</Text>
+        <Text>DailyFashionScreen</Text>
       </Box>
     );
   }
