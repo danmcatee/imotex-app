@@ -11,6 +11,16 @@ import theme from '../constants/Theme';
 
 import { tabBarIcons } from '../constants/Images';
 
+const primaryHeader = {
+  headerStyle: {
+    backgroundColor: theme.colors.grey,
+  },
+  headerTintColor: theme.colors.red,
+  headerTitleStyle: {
+    fontWeight: '500',
+  },
+};
+
 const AuthNavigator = createStackNavigator(
   {
     Login: {
@@ -24,11 +34,22 @@ const AuthNavigator = createStackNavigator(
   }
 );
 
-const TabNavigator = createBottomTabNavigator(
+const HomeStack = createStackNavigator(
   {
     Home: {
       getScreen: () => require('./HomeScreen').default,
     },
+  },
+  {
+    navigationOptions: {
+      ...primaryHeader,
+    },
+  }
+);
+
+const TabNavigator = createBottomTabNavigator(
+  {
+    Home: HomeStack,
     Brands: {
       getScreen: () => require('./BrandsScreen').default,
     },
@@ -70,9 +91,7 @@ const MainNavigator = createStackNavigator(
   },
   {
     navigationOptions: {
-      headerStyle: {
-        backgroundColor: theme.colors.grey,
-      },
+      header: null,
     },
   }
 );
