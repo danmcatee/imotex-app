@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 
-import Box from '../commons/Box';
 import { NavigationService } from '../api/NavigationService';
 import { images } from '../constants/Images';
 import theme from '../constants/Theme';

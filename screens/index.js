@@ -49,6 +49,9 @@ const HomeStack = createStackNavigator(
     Home: {
       getScreen: () => require('./HomeScreen').default,
     },
+    DailyFashion: {
+      getScreen: () => require('./DailyFashionScreen').default,
+    },
   },
   {
     navigationOptions: {
