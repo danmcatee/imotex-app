@@ -4,7 +4,7 @@ import {
   createStackNavigator,
   createSwitchNavigator,
 } from 'react-navigation';
-import { Image } from 'react-native';
+import { Image, Animated, Easing } from 'react-native';
 
 import { NavigationService } from '../api/NavigationService';
 import theme from '../constants/Theme';
@@ -34,6 +34,13 @@ const AuthNavigator = createStackNavigator(
     navigationOptions: {
       header: null,
     },
+    transitionConfig: () => ({
+      transitionSpec: {
+        duration: 0,
+        timing: Animated.timing,
+        easing: Easing.step0,
+      },
+    }),
   }
 );
 
