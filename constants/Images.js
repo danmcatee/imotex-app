@@ -1,5 +1,6 @@
 export const images = {
   splashScreen: require('../assets/images/splashScreen.png'),
+  loginScreen: require('../assets/images/loginScreen.png'),
   homeHeader: require('../assets/images/home_header.png'),
   homeSuxxess: require('../assets/images/home_suxxess.png'),
   startPageArrow: require('../assets/images/start_page_segment.png'),

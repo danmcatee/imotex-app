@@ -23,6 +23,9 @@ const primaryHeader = {
 
 const AuthNavigator = createStackNavigator(
   {
+    Options: {
+      getScreen: () => require('./AuthScreen').default,
+    },
     Login: {
       getScreen: () => require('./LoginScreen').default,
     },
