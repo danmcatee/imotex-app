@@ -15,12 +15,12 @@ import DailyInspiration from '../components/DailyInspiration';
 import imageDimensions from '../utils/imageDimensions';
 
 const listMenu = [
-  { id: 1, title: 'DAILY FASHION' },
-  { id: 2, title: 'BRANDS' },
-  { id: 3, title: 'NEWS' },
-  { id: 4, title: 'SERVICE' },
-  { id: 5, title: 'MERKLISTE' },
-  { id: 6, title: 'ALLES ÜBER DIE APP' },
+  { id: 1, title: 'DAILY FASHION', route: 'DailyFashion' },
+  { id: 2, title: 'BRANDS', route: 'Brands' },
+  { id: 3, title: 'NEWS', route: 'News' },
+  { id: 4, title: 'SERVICE', route: 'Service' },
+  { id: 5, title: 'MERKLISTE', route: 'Favorites' },
+  { id: 6, title: 'ALLES ÜBER DIE APP', route: 'About' },
 ];
 
 class HomeScreen extends Component {
@@ -31,7 +31,7 @@ class HomeScreen extends Component {
   renderItem = ({ item }) => <ListMenuItem {...item} />;
   render() {
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <Image
           source={images.homeHeader}
           style={imageDimensions(750, 427, 10)}
