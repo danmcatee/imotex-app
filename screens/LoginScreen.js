@@ -6,6 +6,7 @@ import {
   TextInput,
   View,
   TouchableOpacity,
+  KeyboardAvoidingView,
 } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 
@@ -28,7 +29,10 @@ class LoginScreen extends Component {
   }
 
   handleLogin = () => {
-    if (this.state.username === 'user' && this.state.password === 'password') {
+    if (
+      this.state.username.toLowerCase() === 'user' &&
+      this.state.password.toLowerCase() === 'password'
+    ) {
       NavigationService.navigate('Main');
     } else {
       this.setState({ loginError: true });
@@ -42,22 +46,21 @@ class LoginScreen extends Component {
         resizeMode="cover"
         source={images.loginScreen}
       >
-        <View style={styles.loginBox}>
+        <KeyboardAvoidingView style={styles.loginBox} behavior="padding">
           <Text style={styles.title}>Anmelden</Text>
           <View style={styles.inputContainer}>
             <TextInput
+              textContentType="username"
               placeholder="Benutzername oder Email"
-              onChangeText={username =>
-                this.setState({ username: username.toLocaleLowerCase() })
-              }
+              onChangeText={username => this.setState({ username: username })}
               value={this.state.username}
               style={styles.input}
             />
             <TextInput
+              textContentType="password"
+              secureTextEntry={true}
               placeholder="Passwort"
-              onChangeText={password =>
-                this.setState({ password: password.toLocaleLowerCase() })
-              }
+              onChangeText={password => this.setState({ password: password })}
               value={this.state.password}
               style={styles.input}
             />
@@ -79,7 +82,7 @@ class LoginScreen extends Component {
               <Text style={styles.buttonText}>OK</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </ImageBackground>
     );
   }
