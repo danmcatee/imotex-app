@@ -58,7 +58,6 @@ class DailyFashionScreen extends Component {
   //   </View>
   // );
   render() {
-    console.log(this.props.productStruct.parentCategories);
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Daily Fashion</Text>
@@ -74,6 +73,7 @@ class DailyFashionScreen extends Component {
           renderHeader={this._renderHeader}
           renderContent={this._renderContent}
           onChange={activeSections => this.setState({ activeSections })}
+          underlayColor="transparent"
         />
       </View>
     );
