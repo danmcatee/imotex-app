@@ -19,12 +19,21 @@ class LoginScreen extends Component {
   state = {
     username: '',
     password: '',
+    loginError: false,
   };
   componentDidMount() {
     // setTimeout(() => {
     //   NavigationService.navigate('Main');
     // }, 2000);
   }
+
+  handleLogin = () => {
+    if (this.state.username === 'user' && this.state.password === 'password') {
+      NavigationService.navigate('Main');
+    } else {
+      this.setState({ loginError: true });
+    }
+  };
 
   render() {
     return (
@@ -38,16 +47,23 @@ class LoginScreen extends Component {
           <View style={styles.inputContainer}>
             <TextInput
               placeholder="Benutzername oder Email"
-              onChangeText={username => this.setState({ username })}
+              onChangeText={username =>
+                this.setState({ username: username.toLocaleLowerCase() })
+              }
               value={this.state.username}
               style={styles.input}
             />
             <TextInput
               placeholder="Passwort"
-              onChangeText={password => this.setState({ password })}
+              onChangeText={password =>
+                this.setState({ password: password.toLocaleLowerCase() })
+              }
               value={this.state.password}
               style={styles.input}
             />
+            {this.state.loginError && (
+              <Text style={styles.errorMsg}>Falsche Daten</Text>
+            )}
           </View>
           <TouchableOpacity style={styles.forgot}>
             <Text style={styles.forgotText}>Passwort vergessen?</Text>
@@ -59,7 +75,7 @@ class LoginScreen extends Component {
             >
               <Text style={styles.buttonText}>Abbruch</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={this.handleLogin}>
               <Text style={styles.buttonText}>OK</Text>
             </TouchableOpacity>
           </View>
@@ -98,6 +114,9 @@ const styles = StyleSheet.create({
     borderColor: theme.colors.darkGrey,
     padding: 5,
     marginBottom: 5,
+  },
+  errorMsg: {
+    color: theme.colors.red,
   },
   forgot: {
     marginTop: 5,
