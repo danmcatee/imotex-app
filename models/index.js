@@ -11,9 +11,7 @@ const companyList = CompanyList.create({
   companies,
 });
 
-const productStruct = ProductStruct.create({
-  parentCategories,
-});
+const productStruct = ProductStruct.create(parentCategories);
 
 export const store = {
   currentUser,
