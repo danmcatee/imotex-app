@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
-import { Text, View, FlatList, StyleSheet, Image } from 'react-native';
+import {
+  Text,
+  View,
+  FlatList,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import Accordion from 'react-native-collapsible/Accordion';
 import { inject } from 'mobx-react/native';
 
 import ProductListItem from '../components/ProductListItem';
 import theme from '../constants/Theme';
 import { images } from '../constants/Images';
+import { NavigationService } from '../api/NavigationService';
 
 categories = [
   {
@@ -41,6 +49,7 @@ class DailyFashionScreen extends Component {
   // renderItem = ({ item }) => <ProductListItem {...item} />;
   _renderContent = section => (
     <View>
+      <ProductListItem category={{ title: 'Alle' }} />
       {section.categories.map(category => (
         <ProductListItem key={category.id} category={category} />
       ))}
@@ -66,6 +75,14 @@ class DailyFashionScreen extends Component {
           renderItem={this.renderItem}
           keyExtractor={item => String(item.id)}
         /> */}
+        <TouchableOpacity
+          onPress={() => NavigationService.navigate('SearchCompany')}
+        >
+          <View style={styles.categoryContainer}>
+            <Text style={styles.item}>Alle</Text>
+            <Image source={images.startPageArrow} />
+          </View>
+        </TouchableOpacity>
         <Accordion
           activeSections={this.state.activeSections}
           sections={this.props.productStruct.parentCategories}
