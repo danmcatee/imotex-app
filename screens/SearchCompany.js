@@ -11,6 +11,7 @@ class SearchCompany extends Component {
   };
   render() {
     const category = this.props.navigation.getParam('category', 'Alle');
+    console.log(category);
     const { companies } = this.props.companyList;
     const matchingProducts = [];
     const matchingCompanies = [];
@@ -28,14 +29,29 @@ class SearchCompany extends Component {
     return (
       <View>
         <Text style={styles.title}>{category}</Text>
-        {matchingCompanies.map(company => (
-          <View key={company.company} style={styles.companyContainer}>
-            <Text style={styles.company}>{company.company}</Text>
-            {company.products.map(product => (
-              <Text key={product.id}>{product.name}</Text>
+        {category === 'Alle' ? (
+          <View>
+            {companies.map(company => (
+              <View key={company.id} style={styles.companyContainer}>
+                <Text style={styles.company}>{company.name}</Text>
+                {company.products.map(product => (
+                  <Text key={product.id}>{product.name}</Text>
+                ))}
+              </View>
             ))}
           </View>
-        ))}
+        ) : (
+          <View>
+            {matchingCompanies.map(company => (
+              <View key={company.company} style={styles.companyContainer}>
+                <Text style={styles.company}>{company.company}</Text>
+                {company.products.map(product => (
+                  <Text key={product.id}>{product.name}</Text>
+                ))}
+              </View>
+            ))}
+          </View>
+        )}
       </View>
     );
   }
