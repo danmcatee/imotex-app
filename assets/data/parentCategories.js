@@ -2,143 +2,143 @@ export default [
   {
     id: '1',
     title: 'Damenmode',
-    categories: [
+    values: [
       {
         id: '11',
         title: 'Blusen/Tuniken',
-        subCategories: [],
+        values: [],
       },
       {
         id: '12',
         title: 'Shirts/Tops',
-        subCategories: [],
+        values: [],
       },
       {
         id: '13',
         title: 'Röcke',
-        subCategories: [],
+        values: [],
       },
       {
         id: '14',
         title: 'Hosen',
-        subCategories: [],
+        values: [],
       },
       {
         id: '15',
         title: 'Jeans',
-        subCategories: [],
+        values: [],
       },
       {
         id: '16',
         title: 'Strick/Masche',
-        subCategories: [],
+        values: [],
       },
       {
         id: '17',
         title: 'Kleider',
-        subCategories: [],
+        values: [],
       },
       {
         id: '18',
         title: 'Mäntel',
-        subCategories: [],
+        values: [],
       },
       {
         id: '19',
         title: 'Leder',
-        subCategories: [],
+        values: [],
       },
       {
         id: '20',
         title: 'Cocktail/Abendmode',
-        subCategories: [],
+        values: [],
       },
       {
         id: '21',
         title: 'Brautmoden',
-        subCategories: [],
+        values: [],
       },
     ],
   },
   {
     id: '2',
     title: 'Herrenmode',
-    categories: [
+    values: [
       {
         id: '21',
         title: 'Hemden',
-        subcategories: [],
+        values: [],
       },
       {
         id: '22',
         title: 'Hosen',
-        subcategories: [],
+        values: [],
       },
       {
         id: '23',
         title: 'Strick/Masche',
-        subcategories: [],
+        values: [],
       },
       {
         id: '24',
         title: 'Shirts',
-        subcategories: [],
+        values: [],
       },
       {
         id: '25',
         title: 'Anzüge',
-        subcategories: [],
+        values: [],
       },
       {
         id: '26',
         title: 'Sakkos',
-        subcategories: [],
+        values: [],
       },
       {
         id: '27',
         title: 'Jacken',
-        subcategories: [],
+        values: [],
       },
       {
         id: '28',
         title: 'Mäntel',
-        subcategories: [],
+        values: [],
       },
       {
         id: '29',
         title: 'Leder',
-        subcategories: [],
+        values: [],
       },
     ],
   },
   {
     id: '3',
     title: 'Kindermode',
-    categories: [
+    values: [
       {
         id: '31',
         title: 'Mädchen 2-9',
-        subcategories: [],
+        values: [],
       },
       {
         id: '32',
         title: 'Mädchen 9-16',
-        subcategories: [],
+        values: [],
       },
       {
         id: '33',
         title: 'Jungen 2-9',
-        subcategories: [],
+        values: [],
       },
       {
         id: '34',
         title: 'Jungen 9-16',
-        subcategories: [],
+        values: [],
       },
       {
         id: '35',
         title: 'Babies 0-2',
-        subcategories: [],
+        values: [],
       },
     ],
   },
