@@ -48,7 +48,7 @@ class DailyFashionScreen extends Component {
   };
   // renderItem = ({ item }) => <ProductListItem {...item} />;
   _renderContent = section => (
-    <View>
+    <View style={{ marginTop: 20 }}>
       <ProductListItem category={{ title: 'Alle' }} />
       {section.values.map(category => (
         <ProductListItem key={category.id} category={category} />
@@ -77,6 +77,7 @@ class DailyFashionScreen extends Component {
         /> */}
         <TouchableOpacity
           onPress={() => NavigationService.navigate('SearchCompany')}
+          activeOpacity={1}
         >
           <View style={styles.categoryContainer}>
             <Text style={styles.item}>Alle</Text>

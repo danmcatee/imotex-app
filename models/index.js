@@ -2,7 +2,7 @@ import { CurrentUser } from './CurrentUser';
 import { CategoryRoot } from './Categories';
 import { CompanyList } from './Companies';
 
-import parentCategories from '../assets/data/parentCategories';
+import categories from '../assets/data/categories';
 import companies from '../assets/data/companies';
 
 const currentUser = CurrentUser.create();
@@ -12,7 +12,7 @@ const companyList = CompanyList.create({
 });
 
 const categoryRoot = CategoryRoot.create({
-  values: parentCategories,
+  values: categories,
 });
 
 export const store = {
