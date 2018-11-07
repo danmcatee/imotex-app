@@ -1,5 +1,5 @@
 import { CurrentUser } from './CurrentUser';
-import { ProductStruct } from './ProductStruct';
+import { CategoryRoot } from './Categories';
 import { CompanyList } from './Companies';
 
 import parentCategories from '../assets/data/parentCategories';
@@ -11,11 +11,13 @@ const companyList = CompanyList.create({
   companies,
 });
 
-const productStruct = ProductStruct.create(parentCategories);
+const categoryRoot = CategoryRoot.create({
+  values: parentCategories,
+});
 
 export const store = {
   currentUser,
-  productStruct,
+  categoryRoot,
   companyList,
 };
 

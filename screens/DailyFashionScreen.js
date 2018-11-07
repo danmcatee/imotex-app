@@ -38,7 +38,7 @@ categories = [
   },
 ];
 
-@inject('productStruct')
+@inject('categoryRoot')
 class DailyFashionScreen extends Component {
   static navigationOptions = {
     title: 'Daily Fashion',
@@ -50,7 +50,7 @@ class DailyFashionScreen extends Component {
   _renderContent = section => (
     <View>
       <ProductListItem category={{ title: 'Alle' }} />
-      {section.categories.map(category => (
+      {section.values.map(category => (
         <ProductListItem key={category.id} category={category} />
       ))}
     </View>
@@ -85,7 +85,7 @@ class DailyFashionScreen extends Component {
         </TouchableOpacity>
         <Accordion
           activeSections={this.state.activeSections}
-          sections={this.props.productStruct.parentCategories}
+          sections={this.props.categoryRoot.values}
           renderSectionTitle={this._renderSectionTitle}
           renderHeader={this._renderHeader}
           renderContent={this._renderContent}
