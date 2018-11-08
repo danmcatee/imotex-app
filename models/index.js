@@ -1,24 +1,24 @@
 import { CurrentUser } from './CurrentUser';
-import { CategoryRoot } from './Categories';
-import { CompanyList } from './Companies';
+import { CategoryStore } from './Categories';
+import { CompanyStore } from './Companies';
 
 import categories from '../assets/data/categories';
 import companies from '../assets/data/companies';
 
 const currentUser = CurrentUser.create();
 
-const companyList = CompanyList.create({
+const companyStore = CompanyStore.create({
   companies,
 });
 
-const categoryRoot = CategoryRoot.create({
+const categoryStore = CategoryStore.create({
   values: categories,
 });
 
 export const store = {
   currentUser,
-  categoryRoot,
-  companyList,
+  categoryStore,
+  companyStore,
 };
 
 // TODO: Delete after development

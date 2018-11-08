@@ -13,6 +13,11 @@ export default [
         name: 'Blumenbluse',
         categories: ['Blusen/Tuniken', 'Strick/Masche'],
       },
+      {
+        id: '45',
+        name: 'Wisenbluse',
+        categories: ['Blusen/Tuniken', 'Strick/Masche'],
+      },
     ],
   },
   {

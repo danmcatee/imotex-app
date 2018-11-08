@@ -33,6 +33,6 @@ const Category = types.model('Category', {
   values: types.maybe(types.array(types.late(() => Category))),
 });
 
-export const CategoryRoot = types.model('CategoryRoot', {
+export const CategoryStore = types.model('CategoryRoot', {
   values: types.array(Category),
 });

@@ -16,7 +16,7 @@ import theme from '../constants/Theme';
 import { images } from '../constants/Images';
 import { NavigationService } from '../api/NavigationService';
 
-@inject('categoryRoot')
+@inject('categoryStore')
 class DailyFashionScreen extends Component {
   static navigationOptions = {
     title: 'Daily Fashion',
@@ -57,7 +57,7 @@ class DailyFashionScreen extends Component {
           <CategoryButton label="Alle" />
           <Accordion
             activeSections={this.state.activeSections}
-            sections={this.props.categoryRoot.values}
+            sections={this.props.categoryStore.values}
             renderSectionTitle={this._renderSectionTitle}
             renderHeader={this._renderHeader}
             renderContent={this._renderContent}

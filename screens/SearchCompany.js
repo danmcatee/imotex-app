@@ -4,7 +4,7 @@ import { inject } from 'mobx-react/native';
 
 import theme from '../constants/Theme';
 
-@inject('companyList')
+@inject('companyStore')
 class SearchCompany extends Component {
   static navigationOptions = {
     title: 'Daily Fashion',
@@ -12,19 +12,10 @@ class SearchCompany extends Component {
   render() {
     const category = this.props.navigation.getParam('category', 'Alle');
     console.log(category);
-    const { companies } = this.props.companyList;
-    const matchingProducts = [];
-    const matchingCompanies = [];
-    for (let i = 0; i < companies.length; i++) {
-      for (let j = 0; j < companies[i].products.length; j++) {
-        if (companies[i].products[j].categories.includes(category)) {
-          matchingCompanies.push({
-            company: companies[i].name,
-            products: matchingProducts.concat(companies[i].products[j]),
-          });
-        }
-      }
-    }
+    const { companies } = this.props.companyStore;
+    const matchingCompanies = this.props.companyStore.matchingCompanies(
+      category
+    );
 
     return (
       <View>
@@ -43,9 +34,9 @@ class SearchCompany extends Component {
         ) : (
           <View>
             {matchingCompanies.map(company => (
-              <View key={company.company} style={styles.companyContainer}>
-                <Text style={styles.company}>{company.company}</Text>
-                {company.products.map(product => (
+              <View key={company.id} style={styles.companyContainer}>
+                <Text style={styles.company}>{company.name}</Text>
+                {company.matchingProducts(category).map(product => (
                   <Text key={product.id}>{product.name}</Text>
                 ))}
               </View>
