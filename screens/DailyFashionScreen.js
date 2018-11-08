@@ -11,32 +11,10 @@ import Accordion from 'react-native-collapsible/Accordion';
 import { inject } from 'mobx-react/native';
 
 import ProductListItem from '../components/ProductListItem';
+import CategoryButton from '../components/CategoryButton';
 import theme from '../constants/Theme';
 import { images } from '../constants/Images';
 import { NavigationService } from '../api/NavigationService';
-
-categories = [
-  {
-    id: 1,
-    title: 'Alle',
-    content: 'Alle',
-  },
-  {
-    id: 2,
-    title: 'Damenmode',
-    content: 'Damenmode',
-  },
-  {
-    id: 3,
-    title: 'Herrenmode',
-    content: 'Herrenmode',
-  },
-  {
-    id: 4,
-    title: 'Kindermode',
-    content: 'Kindermdoe',
-  },
-];
 
 @inject('categoryRoot')
 class DailyFashionScreen extends Component {
@@ -75,15 +53,7 @@ class DailyFashionScreen extends Component {
           renderItem={this.renderItem}
           keyExtractor={item => String(item.id)}
         /> */}
-        <TouchableOpacity
-          onPress={() => NavigationService.navigate('SearchCompany')}
-          activeOpacity={1}
-        >
-          <View style={styles.categoryContainer}>
-            <Text style={styles.item}>Alle</Text>
-            <Image source={images.startPageArrow} />
-          </View>
-        </TouchableOpacity>
+        <CategoryButton label="Alle" />
         <Accordion
           activeSections={this.state.activeSections}
           sections={this.props.categoryRoot.values}
@@ -93,6 +63,10 @@ class DailyFashionScreen extends Component {
           onChange={activeSections => this.setState({ activeSections })}
           underlayColor="transparent"
         />
+        <View>
+          <CategoryButton label="Firmen" />
+          <CategoryButton label="Kollektionen" />
+        </View>
       </View>
     );
   }
