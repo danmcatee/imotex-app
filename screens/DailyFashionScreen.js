@@ -47,25 +47,27 @@ class DailyFashionScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Daily Fashion</Text>
-        {/* <FlatList
+        <View>
+          <Text style={styles.title}>Daily Fashion</Text>
+          {/* <FlatList
           data={categories}
           renderItem={this.renderItem}
           keyExtractor={item => String(item.id)}
         /> */}
-        <CategoryButton label="Alle" />
-        <Accordion
-          activeSections={this.state.activeSections}
-          sections={this.props.categoryRoot.values}
-          renderSectionTitle={this._renderSectionTitle}
-          renderHeader={this._renderHeader}
-          renderContent={this._renderContent}
-          onChange={activeSections => this.setState({ activeSections })}
-          underlayColor="transparent"
-        />
-        <View>
+          <CategoryButton label="Alle" />
+          <Accordion
+            activeSections={this.state.activeSections}
+            sections={this.props.categoryRoot.values}
+            renderSectionTitle={this._renderSectionTitle}
+            renderHeader={this._renderHeader}
+            renderContent={this._renderContent}
+            onChange={activeSections => this.setState({ activeSections })}
+            underlayColor="transparent"
+          />
+        </View>
+        <View style={{ marginBottom: 10 }}>
           <CategoryButton label="Firmen" />
-          <CategoryButton label="Kollektionen" />
+          <CategoryButton label="Kollektionen" nounderline />
         </View>
       </View>
     );
@@ -77,6 +79,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     paddingHorizontal: 10,
+    justifyContent: 'space-between',
   },
   title: {
     fontWeight: '600',
