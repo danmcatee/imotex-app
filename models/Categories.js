@@ -27,7 +27,7 @@ import { types } from 'mobx-state-tree';
 //   parentCategories: types.array(ParentCategory),
 // });
 
-const Category = types.model('Category', {
+export const Category = types.model('Category', {
   id: types.identifier,
   title: types.string,
   values: types.maybe(types.array(types.late(() => Category))),

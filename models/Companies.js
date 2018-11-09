@@ -1,4 +1,5 @@
 import { types } from 'mobx-state-tree';
+import { Category } from './Categories';
 
 const Product = types.model('Product', {
   id: types.identifier,

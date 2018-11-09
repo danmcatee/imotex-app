@@ -7,7 +7,7 @@ import { NavigationService } from '../api/NavigationService';
 class ListMenuItem extends PureComponent {
   handlePress = () => {
     NavigationService.navigate('SearchCompany', {
-      category: this.props.category.title,
+      category: this.props.category,
     });
   };
 

@@ -26,3 +26,19 @@ export const tabBarIcons = {
     Settings: require('../assets/images/tabIcons/person.png'),
   },
 };
+
+export const productImgs = {
+  P36201: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
+  P36202: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
+  P36203: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
+  P36213: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
+  P36204: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
+  P36205: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
+  P36206: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
+  P36207: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
+  P36208: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
+  P36209: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
+  P36210: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
+  P36211: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
+  P36212: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
+};

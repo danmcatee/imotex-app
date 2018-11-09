@@ -5,6 +5,7 @@ import { inject } from 'mobx-react/native';
 import theme from '../constants/Theme';
 
 @inject('companyStore')
+@inject('categoryStore')
 class SearchCompany extends Component {
   static navigationOptions = {
     title: 'Daily Fashion',
@@ -14,12 +15,12 @@ class SearchCompany extends Component {
     console.log(category);
     const { companies } = this.props.companyStore;
     const matchingCompanies = this.props.companyStore.matchingCompanies(
-      category
+      category.id
     );
 
     return (
       <View>
-        <Text style={styles.title}>{category}</Text>
+        <Text style={styles.title}>{category.title}</Text>
         {category === 'Alle' ? (
           <View>
             {companies.map(company => (
@@ -36,7 +37,7 @@ class SearchCompany extends Component {
             {matchingCompanies.map(company => (
               <View key={company.id} style={styles.companyContainer}>
                 <Text style={styles.company}>{company.name}</Text>
-                {company.matchingProducts(category).map(product => (
+                {company.matchingProducts(category.id).map(product => (
                   <Text key={product.id}>{product.name}</Text>
                 ))}
               </View>

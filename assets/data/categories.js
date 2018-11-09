@@ -4,57 +4,57 @@ export default [
     title: 'Damenmode',
     values: [
       {
-        id: '11',
+        id: '101',
         title: 'Blusen/Tuniken',
         values: [],
       },
       {
-        id: '12',
+        id: '102',
         title: 'Shirts/Tops',
         values: [],
       },
       {
-        id: '13',
+        id: '103',
         title: 'Röcke',
         values: [],
       },
       {
-        id: '14',
+        id: '104',
         title: 'Hosen',
         values: [],
       },
       {
-        id: '15',
+        id: '105',
         title: 'Jeans',
         values: [],
       },
       {
-        id: '16',
+        id: '106',
         title: 'Strick/Masche',
         values: [],
       },
       {
-        id: '17',
+        id: '107',
         title: 'Kleider',
         values: [],
       },
       {
-        id: '18',
+        id: '108',
         title: 'Mäntel',
         values: [],
       },
       {
-        id: '19',
+        id: '109',
         title: 'Leder',
         values: [],
       },
       {
-        id: '20',
+        id: '110',
         title: 'Cocktail/Abendmode',
         values: [],
       },
       {
-        id: '21',
+        id: '111',
         title: 'Brautmoden',
         values: [],
       },
@@ -65,47 +65,47 @@ export default [
     title: 'Herrenmode',
     values: [
       {
-        id: '21',
+        id: '201',
         title: 'Hemden',
         values: [],
       },
       {
-        id: '22',
+        id: '202',
         title: 'Hosen',
         values: [],
       },
       {
-        id: '23',
+        id: '203',
         title: 'Strick/Masche',
         values: [],
       },
       {
-        id: '24',
+        id: '204',
         title: 'Shirts',
         values: [],
       },
       {
-        id: '25',
+        id: '205',
         title: 'Anzüge',
         values: [],
       },
       {
-        id: '26',
+        id: '206',
         title: 'Sakkos',
         values: [],
       },
       {
-        id: '27',
+        id: '207',
         title: 'Jacken',
         values: [],
       },
       {
-        id: '28',
+        id: '208',
         title: 'Mäntel',
         values: [],
       },
       {
-        id: '29',
+        id: '209',
         title: 'Leder',
         values: [],
       },
@@ -116,27 +116,27 @@ export default [
     title: 'Kindermode',
     values: [
       {
-        id: '31',
+        id: '301',
         title: 'Mädchen 2-9',
         values: [],
       },
       {
-        id: '32',
+        id: '302',
         title: 'Mädchen 9-16',
         values: [],
       },
       {
-        id: '33',
+        id: '303',
         title: 'Jungen 2-9',
         values: [],
       },
       {
-        id: '34',
+        id: '304',
         title: 'Jungen 9-16',
         values: [],
       },
       {
-        id: '35',
+        id: '305',
         title: 'Babies 0-2',
         values: [],
       },
