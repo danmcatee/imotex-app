@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { inject } from 'mobx-react/native';
 
 import theme from '../constants/Theme';
+import CompanyRow from '../components/CompanyRow';
 
 @inject('companyStore')
-@inject('categoryStore')
 class SearchCompany extends Component {
   static navigationOptions = {
     title: 'Daily Fashion',
@@ -19,30 +19,42 @@ class SearchCompany extends Component {
     );
 
     return (
-      <View>
-        <Text style={styles.title}>{category.title}</Text>
+      <View style={{ flex: 1 }}>
+        <Text style={styles.breadcrumbs}>
+          Daily Fashion /{' '}
+          <Text style={styles.title}>
+            {category.title ? category.title : 'Alle'}
+          </Text>
+        </Text>
         {category === 'Alle' ? (
-          <View>
+          <ScrollView>
             {companies.map(company => (
-              <View key={company.id} style={styles.companyContainer}>
-                <Text style={styles.company}>{company.name}</Text>
-                {company.products.map(product => (
-                  <Text key={product.id}>{product.name}</Text>
-                ))}
-              </View>
+              // <View key={company.id} style={styles.companyContainer}>
+              //   <Text style={styles.company}>{company.name}</Text>
+              //   {company.products.map(product => (
+              //     <Text key={product.id}>{product.name}</Text>
+              //   ))}
+              // </View>
+              <CompanyRow key={company.id} company={company} all={true} />
             ))}
-          </View>
+          </ScrollView>
         ) : (
-          <View>
+          <ScrollView>
             {matchingCompanies.map(company => (
-              <View key={company.id} style={styles.companyContainer}>
-                <Text style={styles.company}>{company.name}</Text>
-                {company.matchingProducts(category.id).map(product => (
-                  <Text key={product.id}>{product.name}</Text>
-                ))}
-              </View>
+              // <View key={company.id} style={styles.companyContainer}>
+              //   <Text style={styles.company}>{company.name}</Text>
+              //   {company.matchingProducts(category.id).map(product => (
+              //     <Text key={product.id}>{product.name}</Text>
+              //   ))}
+              // </View>
+              <CompanyRow
+                key={company.id}
+                company={company}
+                all={false}
+                category={category}
+              />
             ))}
-          </View>
+          </ScrollView>
         )}
       </View>
     );
@@ -50,11 +62,11 @@ class SearchCompany extends Component {
 }
 
 const styles = StyleSheet.create({
+  breadcrumbs: {
+    marginBottom: 15,
+  },
   title: {
     color: theme.colors.red,
-    fontWeight: '600',
-    fontSize: 18,
-    marginBottom: 15,
   },
   companyContainer: {
     marginBottom: 10,
