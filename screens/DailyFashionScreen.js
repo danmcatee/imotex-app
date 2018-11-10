@@ -27,7 +27,7 @@ class DailyFashionScreen extends Component {
   // renderItem = ({ item }) => <ProductListItem {...item} />;
   _renderContent = section => (
     <View style={{ marginTop: 20 }}>
-      <ProductListItem category={{ title: 'Alle' }} />
+      <ProductListItem category={{ title: 'Alle' }} all={true} />
       {section.values.map(category => (
         <ProductListItem key={category.id} category={category} />
       ))}

@@ -4,11 +4,12 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { images } from '../constants/Images';
 import { NavigationService } from '../api/NavigationService';
 
-class ListMenuItem extends PureComponent {
+class ProductListItem extends PureComponent {
   handlePress = () => {
-    NavigationService.navigate('SearchCompany', {
-      category: this.props.category,
-    });
+    NavigationService.navigate(
+      'SearchCompany',
+      this.props.all ? null : { category: this.props.category }
+    );
   };
 
   render() {
@@ -39,4 +40,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListMenuItem;
+export default ProductListItem;
