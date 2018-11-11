@@ -5,7 +5,7 @@ import { inject } from 'mobx-react/native';
 import theme from '../constants/Theme';
 import CompanyRow from '../components/CompanyRow';
 
-@inject('companyStore')
+@inject('productStore')
 class SearchCompany extends Component {
   static navigationOptions = {
     title: 'Daily Fashion',
@@ -13,8 +13,8 @@ class SearchCompany extends Component {
   render() {
     const category = this.props.navigation.getParam('category', 'Alle');
     console.log(category);
-    const { companies } = this.props.companyStore;
-    const matchingCompanies = this.props.companyStore.matchingCompanies(
+    const { companies } = this.props.productStore;
+    const matchingCompanies = this.props.productStore.matchingCompanies(
       category.id
     );
 

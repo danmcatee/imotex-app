@@ -34,5 +34,5 @@ export const Category = types.model('Category', {
 });
 
 export const CategoryStore = types.model('CategoryRoot', {
-  values: types.array(Category),
+  categories: types.array(Category),
 });

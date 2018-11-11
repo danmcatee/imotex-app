@@ -1,12 +1,27 @@
 import React, { Component } from 'react';
-import { View, Text, Image, ScrollView, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import { inject } from 'mobx-react/native';
 
 import { productImgs } from '../constants/Images';
 import Theme from '../constants/Theme';
+import { NavigationService } from '../api/NavigationService';
+import ProductLink from '../components/ProductLink';
 
-@inject('companyStore')
+@inject('productStore')
 class CompanyRow extends Component {
+  handlePress = product => {
+    NavigationService.navigate('ProductDetail', {
+      product,
+      company: this.props.company,
+    });
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -16,10 +31,9 @@ class CompanyRow extends Component {
         {this.props.all && (
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {this.props.company.products.map(product => (
-              <Image
+              <ProductLink
                 key={product.id}
-                source={productImgs.P36201}
-                style={styles.image}
+                onPress={() => this.handlePress(product)}
               />
             ))}
           </ScrollView>

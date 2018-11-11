@@ -55,6 +55,10 @@ const HomeStack = createStackNavigator(
     SearchCompany: {
       getScreen: () => require('./SearchCompany').default,
     },
+
+    ProductDetail: {
+      getScreen: () => require('./ProductDetailScreen').default,
+    },
   },
   {
     navigationOptions: {
