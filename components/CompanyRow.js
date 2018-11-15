@@ -22,6 +22,10 @@ class CompanyRow extends Component {
       company: this.props.company,
     });
   };
+
+  handleFav = product => {
+    product.toggleFav();
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -34,6 +38,8 @@ class CompanyRow extends Component {
               <ProductLink
                 key={product.id}
                 onPress={() => this.handlePress(product)}
+                handleFav={() => this.handleFav(product)}
+                product={product}
               />
             ))}
           </ScrollView>
@@ -43,10 +49,10 @@ class CompanyRow extends Component {
             {this.props.company
               .matchingProducts(this.props.category.id)
               .map(product => (
-                <Image
+                <ProductLink
                   key={product.id}
-                  source={productImgs.P36201}
-                  style={styles.image}
+                  onPress={() => this.handlePress(product)}
+                  product={product}
                 />
               ))}
           </ScrollView>

@@ -28,17 +28,77 @@ export const tabBarIcons = {
 };
 
 export const productImgs = {
-  P36201: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
-  P36202: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
-  P36203: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
-  P36213: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
-  P36204: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
-  P36205: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
-  P36206: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
-  P36207: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
-  P36208: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
-  P36209: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
-  P36210: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
-  P36211: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
-  P36212: require('../assets/images/products/papaya/CJ223D0EP-K11@6.jpg'),
+  '372': {
+    '1': require('../assets/images/products/apply/1.jpg'),
+    '2': require('../assets/images/products/apply/2.jpg'),
+    '3': require('../assets/images/products/apply/3.jpg'),
+  },
+  '375': {
+    '1': require('../assets/images/products/booda/1.jpg'),
+    '2': require('../assets/images/products/booda/2.jpg'),
+    '3': require('../assets/images/products/booda/3.jpg'),
+  },
+  '367': {
+    '1': require('../assets/images/products/clarissa/1.jpg'),
+    '2': require('../assets/images/products/clarissa/2.jpg'),
+    '3': require('../assets/images/products/clarissa/3.jpg'),
+  },
+  '361': {
+    '1': require('../assets/images/products/creafil/1.jpg'),
+    '2': require('../assets/images/products/creafil/2.jpg'),
+    '3': require('../assets/images/products/creafil/3.jpg'),
+  },
+  '365': {
+    '1': require('../assets/images/products/dongfang/1.jpg'),
+    '2': require('../assets/images/products/dongfang/2.jpg'),
+    '3': require('../assets/images/products/dongfang/3.jpg'),
+    '4': require('../assets/images/products/dongfang/4.jpg'),
+    '5': require('../assets/images/products/dongfang/5.jpg'),
+  },
+  '369': {
+    '1': require('../assets/images/products/effeny/1.jpg'),
+    '2': require('../assets/images/products/effeny/2.jpg'),
+    '3': require('../assets/images/products/effeny/3.jpg'),
+    '4': require('../assets/images/products/effeny/4.jpg'),
+  },
+  '364': {
+    '1': require('../assets/images/products/global9/1.jpg'),
+    '2': require('../assets/images/products/global9/2.jpg'),
+    '3': require('../assets/images/products/global9/3.jpg'),
+  },
+  '354': {
+    '1': require('../assets/images/products/keeko/1.jpg'),
+    '2': require('../assets/images/products/keeko/2.jpg'),
+    '3': require('../assets/images/products/keeko/3.jpg'),
+  },
+  '374': {
+    '1': require('../assets/images/products/mspretty/1.jpg'),
+    '2': require('../assets/images/products/mspretty/2.jpg'),
+    '3': require('../assets/images/products/mspretty/3.jpg'),
+  },
+  '370': {
+    '1': require('../assets/images/products/pinkcherry/1.jpg'),
+    '2': require('../assets/images/products/pinkcherry/2.jpg'),
+    '3': require('../assets/images/products/pinkcherry/3.jpg'),
+  },
+  '377': {
+    '1': require('../assets/images/products/sislo/1.jpg'),
+    '2': require('../assets/images/products/sislo/2.jpg'),
+  },
+  '366': {
+    '1': require('../assets/images/products/versteegha/1.jpg'),
+    '2': require('../assets/images/products/versteegha/2.png'),
+    '3': require('../assets/images/products/versteegha/3.png'),
+    '4': require('../assets/images/products/versteegha/4.png'),
+  },
+  '380': {
+    '1': require('../assets/images/products/whfashion/1.jpg'),
+    '2': require('../assets/images/products/whfashion/2.jpg'),
+    '3': require('../assets/images/products/whfashion/3.jpg'),
+  },
+  '353': {
+    '1': require('../assets/images/products/yalinex/1.jpg'),
+    '2': require('../assets/images/products/yalinex/2.jpg'),
+    '3': require('../assets/images/products/yalinex/3.jpg'),
+  },
 };

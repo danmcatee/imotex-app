@@ -23,7 +23,20 @@ export default class App extends React.Component {
       ...Object.values(images),
       ...Object.values(tabBarIcons.active),
       ...Object.values(tabBarIcons.inactive),
-      ...Object.values(productImgs),
+      ...Object.values(productImgs['372']),
+      ...Object.values(productImgs['375']),
+      ...Object.values(productImgs['367']),
+      ...Object.values(productImgs['361']),
+      ...Object.values(productImgs['365']),
+      ...Object.values(productImgs['369']),
+      ...Object.values(productImgs['364']),
+      ...Object.values(productImgs['354']),
+      ...Object.values(productImgs['374']),
+      ...Object.values(productImgs['370']),
+      ...Object.values(productImgs['377']),
+      ...Object.values(productImgs['366']),
+      ...Object.values(productImgs['380']),
+      ...Object.values(productImgs['353']),
     ]);
     await Promise.all([...imageAssets]);
     this.setState({ isReady: true });

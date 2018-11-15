@@ -11,7 +11,7 @@ import theme from '../constants/Theme';
 
 import { tabBarIcons } from '../constants/Images';
 
-const primaryHeader = {
+export const primaryHeader = {
   headerStyle: {
     backgroundColor: theme.colors.grey,
   },
@@ -67,6 +67,19 @@ const HomeStack = createStackNavigator(
   }
 );
 
+const FavoriteStack = createStackNavigator(
+  {
+    FavHome: {
+      getScreen: () => require('./FavoritesScreen').default,
+    },
+  },
+  {
+    navigationOptions: {
+      ...primaryHeader,
+    },
+  }
+);
+
 const TabNavigator = createBottomTabNavigator(
   {
     Home: HomeStack,
@@ -76,9 +89,7 @@ const TabNavigator = createBottomTabNavigator(
     Service: {
       getScreen: () => require('./ServiceScreen').default,
     },
-    Favorites: {
-      getScreen: () => require('./FavoritesScreen').default,
-    },
+    Favorites: FavoriteStack,
     Settings: {
       getScreen: () => require('./SettingsScreen').default,
     },

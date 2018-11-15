@@ -24,12 +24,20 @@ const Product = types
     id: types.identifier,
     name: types.string,
     image: '',
+    isFavorite: false,
     categories: types.array(types.reference(Category)),
   })
   .views(self => {
     return {
       get company() {
         return getParent(self).get(self);
+      },
+    };
+  })
+  .actions(self => {
+    return {
+      toggleFav() {
+        self.isFavorite = !self.isFavorite;
       },
     };
   });
@@ -69,6 +77,16 @@ const ProductStore = types
         return self.companies.filter(
           company => company.matchingProducts(cat).length
         );
+      },
+      favoriteProducts() {
+        const favorites = [];
+        self.companies.map(company =>
+          company.products.map(product => {
+            if (product.isFavorite) favorites.push(product);
+          })
+        );
+
+        return favorites;
       },
     };
   });

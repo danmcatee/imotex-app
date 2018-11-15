@@ -14,6 +14,9 @@ class SearchCompany extends Component {
     const category = this.props.navigation.getParam('category', 'Alle');
     console.log(category);
     const { companies } = this.props.productStore;
+    const companiesWithProducts = companies.filter(
+      company => company.products.length > 0
+    );
     const matchingCompanies = this.props.productStore.matchingCompanies(
       category.id
     );
@@ -28,7 +31,7 @@ class SearchCompany extends Component {
         </Text>
         {category === 'Alle' ? (
           <ScrollView>
-            {companies.map(company => (
+            {companiesWithProducts.map(company => (
               // <View key={company.id} style={styles.companyContainer}>
               //   <Text style={styles.company}>{company.name}</Text>
               //   {company.products.map(product => (

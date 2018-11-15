@@ -11,6 +11,7 @@ import Accordion from 'react-native-collapsible/Accordion';
 
 import { productImgs } from '../constants/Images';
 import theme from '../constants/Theme';
+import { images } from '../constants/Images';
 
 class ProductDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -20,7 +21,28 @@ class ProductDetailScreen extends Component {
   };
   state = {
     activeSections: [],
+    cats: [
+      'Informationen',
+      'Farben',
+      'Größen',
+      'Merken',
+      'Unternehmen kontaktieren',
+      'Unternehmensinformationen',
+      'Pushnachrichten aktivieren',
+    ],
   };
+
+  _renderContent = section => (
+    <View>
+      <Text>{section}</Text>
+    </View>
+  );
+  _renderHeader = section => (
+    <View style={styles.catContainer}>
+      <Text style={styles.cat}>{section}</Text>
+      <Image source={images.startPageArrow} />
+    </View>
+  );
   render() {
     const product = this.props.navigation.getParam('product');
     const company = this.props.navigation.getParam('company');
@@ -39,21 +61,12 @@ class ProductDetailScreen extends Component {
         <View style={styles.description}>
           <Accordion
             activeSections={this.state.activeSections}
-            sections={this.props.productStore.categories}
-            renderSectionTitle={this._renderSectionTitle}
+            sections={this.state.cats}
             renderHeader={this._renderHeader}
             renderContent={this._renderContent}
             onChange={activeSections => this.setState({ activeSections })}
             underlayColor="transparent"
           />
-
-          <Text>Informationen</Text>
-          <Text>Farben</Text>
-          <Text>Größen</Text>
-          <Text>Merken</Text>
-          <Text>Unternehmen kontaktieren</Text>
-          <Text>Unternehmensinformationen</Text>
-          <Text>Pushnachrichten aktivieren</Text>
         </View>
       </ScrollView>
     );
@@ -65,6 +78,15 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: 'white',
+  },
+  catContainer: {
+    borderBottomWidth: 0.5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  cat: {
+    fontSize: 16,
   },
   imgContainer: {
     flex: 1,

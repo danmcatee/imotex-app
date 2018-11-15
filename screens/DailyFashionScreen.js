@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import Accordion from 'react-native-collapsible/Accordion';
 import { inject } from 'mobx-react/native';
@@ -23,19 +24,44 @@ class DailyFashionScreen extends Component {
   };
   state = {
     activeSections: [],
+    activeSectionsSub: [],
   };
   // renderItem = ({ item }) => <ProductListItem {...item} />;
   _renderContent = section => (
     <View style={{ marginTop: 20 }}>
-      <ProductListItem category={{ title: 'Alle' }} all={true} />
-      {section.values.map(category => (
-        <ProductListItem key={category.id} category={category} />
-      ))}
+      <ProductListItem category={{ title: 'Alle', id: section.id }} />
+      <Accordion
+        activeSections={this.state.activeSectionsSub}
+        sections={section.values}
+        renderSectionTitle={this._renderSectionTitle}
+        renderHeader={this._renderHeaderSub}
+        renderContent={this._renderContentSub}
+        onChange={activeSections =>
+          this.setState({ activeSectionsSub: activeSections })
+        }
+        underlayColor="transparent"
+      />
     </View>
   );
   _renderHeader = section => (
     <View style={styles.categoryContainer}>
       <Text style={styles.item}>{section.title}</Text>
+      <Image source={images.startPageArrow} />
+    </View>
+  );
+
+  _renderContentSub = section => (
+    <View>
+      <ProductListItem category={{ title: 'Alle', id: section.id }} />
+      {section.values.map(category => (
+        <ProductListItem key={category.id} category={category} />
+      ))}
+    </View>
+  );
+
+  _renderHeaderSub = section => (
+    <View style={styles.categoryContainerSub}>
+      <Text style={styles.subItem}>{section.title}</Text>
       <Image source={images.startPageArrow} />
     </View>
   );
@@ -46,38 +72,42 @@ class DailyFashionScreen extends Component {
   // );
   render() {
     return (
-      <View style={styles.container}>
-        <View>
-          <Text style={styles.title}>Daily Fashion</Text>
-          {/* <FlatList
+      <View style={styles.outer}>
+        <ScrollView contentContainerStyle={styles.container}>
+          <View>
+            <Text style={styles.title}>Daily Fashion</Text>
+            {/* <FlatList
           data={categories}
           renderItem={this.renderItem}
           keyExtractor={item => String(item.id)}
         /> */}
-          <CategoryButton label="Alle" />
-          <Accordion
-            activeSections={this.state.activeSections}
-            sections={this.props.productStore.categories}
-            renderSectionTitle={this._renderSectionTitle}
-            renderHeader={this._renderHeader}
-            renderContent={this._renderContent}
-            onChange={activeSections => this.setState({ activeSections })}
-            underlayColor="transparent"
-          />
-        </View>
-        <View style={{ marginBottom: 10 }}>
-          <CategoryButton label="Firmen" />
-          <CategoryButton label="Kollektionen" nounderline />
-        </View>
+            <CategoryButton label="Alle" />
+            <Accordion
+              activeSections={this.state.activeSections}
+              sections={this.props.productStore.categories}
+              renderSectionTitle={this._renderSectionTitle}
+              renderHeader={this._renderHeader}
+              renderContent={this._renderContent}
+              onChange={activeSections => this.setState({ activeSections })}
+              underlayColor="transparent"
+            />
+          </View>
+          <View style={{ marginBottom: 10 }}>
+            <CategoryButton label="Firmen" />
+            <CategoryButton label="Kollektionen" nounderline />
+          </View>
+        </ScrollView>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  outer: {
     flex: 1,
     backgroundColor: 'white',
+  },
+  container: {
     paddingHorizontal: 10,
     justifyContent: 'space-between',
   },
@@ -97,6 +127,19 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     fontWeight: '500',
     fontSize: 16,
+  },
+  categoryContainerSub: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  subItem: {
+    paddingVertical: 5,
+    fontWeight: '500',
+    fontSize: 14,
+  },
+  subCat: {
+    fontSize: 12,
   },
 });
 
