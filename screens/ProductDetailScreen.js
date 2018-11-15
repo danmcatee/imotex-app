@@ -11,8 +11,10 @@ import Accordion from 'react-native-collapsible/Accordion';
 
 import { productImgs } from '../constants/Images';
 import theme from '../constants/Theme';
-import { images } from '../constants/Images';
+import { images, tabBarIcons } from '../constants/Images';
+import { observer } from 'mobx-react/native';
 
+@observer
 class ProductDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -21,15 +23,7 @@ class ProductDetailScreen extends Component {
   };
   state = {
     activeSections: [],
-    cats: [
-      'Informationen',
-      'Farben',
-      'Größen',
-      'Merken',
-      'Unternehmen kontaktieren',
-      'Unternehmensinformationen',
-      'Pushnachrichten aktivieren',
-    ],
+    cats: ['Informationen', 'Farben', 'Größen'],
   };
 
   _renderContent = section => (
@@ -46,29 +40,60 @@ class ProductDetailScreen extends Component {
   render() {
     const product = this.props.navigation.getParam('product');
     const company = this.props.navigation.getParam('company');
+    const companyId = product.id.slice(0, 3);
+    const productPos = product.id.slice(-1);
     return (
-      <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.container}>
         <View style={styles.imgContainer}>
           <Image
-            source={productImgs.P36201}
+            source={productImgs[companyId][productPos]}
             style={styles.mainImg}
             resizeMode="cover"
           />
           <TouchableOpacity style={styles.button}>
             <Text>X</Text>
           </TouchableOpacity>
-        </View>
-        <View style={styles.description}>
-          <Accordion
-            activeSections={this.state.activeSections}
-            sections={this.state.cats}
-            renderHeader={this._renderHeader}
-            renderContent={this._renderContent}
-            onChange={activeSections => this.setState({ activeSections })}
-            underlayColor="transparent"
+          <Image
+            source={
+              tabBarIcons[product.isFavorite ? 'active' : 'inactive'].Favorites
+            }
+            style={styles.heart}
           />
         </View>
-      </ScrollView>
+
+        <ScrollView>
+          <View style={styles.description}>
+            <Accordion
+              activeSections={this.state.activeSections}
+              sections={this.state.cats}
+              renderHeader={this._renderHeader}
+              renderContent={this._renderContent}
+              onChange={activeSections => this.setState({ activeSections })}
+              underlayColor="transparent"
+            />
+
+            <TouchableOpacity
+              style={styles.catContainer}
+              onPress={product.toggleFav}
+            >
+              <Text style={styles.cat}>Merken</Text>
+              <Image source={images.startPageArrow} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.catContainer}>
+              <Text style={styles.cat}>Unternehmen kontaktieren</Text>
+              <Image source={images.startPageArrow} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.catContainer}>
+              <Text style={styles.cat}>Unternehmensinformationen</Text>
+              <Image source={images.startPageArrow} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.catContainer}>
+              <Text style={styles.cat}>Pushnachrichten aktivieren</Text>
+              <Image source={images.startPageArrow} />
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </View>
     );
   }
 }
@@ -76,7 +101,7 @@ class ProductDetailScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: 'stretch',
     backgroundColor: 'white',
   },
   catContainer: {
@@ -91,6 +116,14 @@ const styles = StyleSheet.create({
   imgContainer: {
     flex: 1,
     width: '95%',
+    position: 'relative',
+  },
+  heart: {
+    position: 'absolute',
+    bottom: 10,
+    left: 10,
+    height: 50,
+    width: 50,
   },
   mainImg: {
     flex: 1,
@@ -112,6 +145,7 @@ const styles = StyleSheet.create({
   },
   description: {
     flex: 1,
+    paddingHorizontal: 10,
   },
 });
 

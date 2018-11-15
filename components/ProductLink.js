@@ -10,7 +10,10 @@ const ProductLink = ({ onPress, handleFav, product }) => {
   return (
     <View>
       <TouchableOpacity onPress={onPress}>
-        <Image source={productImgs['372']['1']} style={styles.image} />
+        <Image
+          source={productImgs[companyId][productPos]}
+          style={styles.image}
+        />
       </TouchableOpacity>
       <TouchableOpacity onPress={handleFav} style={styles.heartContainer}>
         <Image

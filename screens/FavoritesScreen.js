@@ -29,10 +29,12 @@ class FavoritesScreen extends Component {
   }
 
   renderItem = ({ item }) => {
+    const companyId = item.id.slice(0, 3);
+    const productPos = item.id.slice(-1);
     return (
       <View>
         <Image
-          source={productImgs['372']['1']}
+          source={productImgs[companyId][productPos]}
           style={[
             styles.image,
             { width: this.state.itemWidth, height: this.state.itemWidth },

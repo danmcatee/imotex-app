@@ -101,4 +101,9 @@ export const productImgs = {
     '2': require('../assets/images/products/yalinex/2.jpg'),
     '3': require('../assets/images/products/yalinex/3.jpg'),
   },
+  '356': {
+    '1': require('../assets/images/products/thiede/1.jpg'),
+    '2': require('../assets/images/products/thiede/2.jpg'),
+    '3': require('../assets/images/products/thiede/3.jpg'),
+  },
 };
