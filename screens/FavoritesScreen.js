@@ -7,10 +7,11 @@ import {
   StyleSheet,
   FlatList,
   Dimensions,
+  TouchableOpacity,
 } from 'react-native';
 
 import { inject, observer } from 'mobx-react/native';
-import { productImgs } from '../constants/Images';
+import { productImgs, tabBarIcons } from '../constants/Images';
 
 @inject('productStore')
 @observer
@@ -41,6 +42,17 @@ class FavoritesScreen extends Component {
           ]}
           resizeMode="contain"
         />
+        <TouchableOpacity
+          onPress={item.toggleFav}
+          style={styles.heartContainer}
+        >
+          <Image
+            source={
+              tabBarIcons[item.isFavorite ? 'active' : 'inactive'].Favorites
+            }
+            style={styles.heart}
+          />
+        </TouchableOpacity>
       </View>
     );
   };
@@ -68,8 +80,17 @@ class FavoritesScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  image: {},
+  image: {
+    position: 'relative',
+  },
   imgContainer: {},
+  heart: {
+    position: 'absolute',
+    bottom: 10,
+    left: 10,
+    height: 30,
+    width: 30,
+  },
 });
 
 export default FavoritesScreen;
