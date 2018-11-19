@@ -34,7 +34,7 @@ export default [
           },
           {
             id: '10106',
-            title: 'Strick/Masche',
+            title: 'Strick/Jersey',
             values: [],
           },
           {
@@ -100,7 +100,7 @@ export default [
           },
           {
             id: '10206',
-            title: 'Strick/Masche',
+            title: 'Strick/Jersey',
             values: [],
           },
           {
@@ -161,7 +161,7 @@ export default [
           },
           {
             id: '10306',
-            title: 'Strick/Masche',
+            title: 'Strick/Jersey',
             values: [],
           },
           {
@@ -253,27 +253,27 @@ export default [
           },
         ],
       },
-      {
-        id: '105',
-        title: 'Bade-/Strandmode',
-        values: [
-          {
-            id: '10501',
-            title: 'Bademode',
-            values: [],
-          },
-          {
-            id: '10502',
-            title: 'Strandmode',
-            values: [],
-          },
-          {
-            id: '10503',
-            title: 'Strandaccessiores',
-            values: [],
-          },
-        ],
-      },
+      // {
+      //   id: '105',
+      //   title: 'Bade-/Strandmode',
+      //   values: [
+      //     {
+      //       id: '10501',
+      //       title: 'Bademode',
+      //       values: [],
+      //     },
+      //     {
+      //       id: '10502',
+      //       title: 'Strandmode',
+      //       values: [],
+      //     },
+      //     {
+      //       id: '10503',
+      //       title: 'Strandaccessiores',
+      //       values: [],
+      //     },
+      //   ],
+      // },
       {
         id: '106',
         title: 'Cocktail-/Abendmode',
@@ -464,7 +464,7 @@ export default [
           },
           {
             id: '20103',
-            title: 'Strick/Masche',
+            title: 'Strick/Jersey',
             values: [],
           },
           {
@@ -520,7 +520,7 @@ export default [
           },
           {
             id: '20204',
-            title: 'Strick/Masche',
+            title: 'Strick/Jersey',
             values: [],
           },
           {
@@ -579,24 +579,44 @@ export default [
             title: 'Anzüge',
             values: [],
           },
-        ],
-      },
-      {
-        id: '204',
-        title: 'Bademoden-/Strandmode',
-        values: [
           {
-            id: '20401',
-            title: 'Badehosen',
+            id: '20305',
+            title: 'Shirts',
             values: [],
           },
           {
-            id: '20402',
-            title: 'Bademäntel',
+            id: '20306',
+            title: 'Jacken',
+            values: [],
+          },
+          {
+            id: '20307',
+            title: 'Mäntel',
+            values: [],
+          },
+          {
+            id: '20308',
+            title: 'Leder',
             values: [],
           },
         ],
       },
+      // {
+      //   id: '204',
+      //   title: 'Bademoden-/Strandmode',
+      //   values: [
+      //     {
+      //       id: '20401',
+      //       title: 'Badehosen',
+      //       values: [],
+      //     },
+      //     {
+      //       id: '20402',
+      //       title: 'Bademäntel',
+      //       values: [],
+      //     },
+      //   ],
+      // },
       {
         id: '205',
         title: 'Accessiores',
@@ -920,7 +940,6 @@ export default [
             title: 'Shirts/Tops',
             values: [],
           },
-
           {
             id: '30505',
             title: 'Hosen/Jeans',
