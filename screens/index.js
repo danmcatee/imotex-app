@@ -3,8 +3,17 @@ import {
   createBottomTabNavigator,
   createStackNavigator,
   createSwitchNavigator,
+  createDrawerNavigator,
 } from 'react-navigation';
-import { Image, Animated, Easing } from 'react-native';
+import {
+  Image,
+  Animated,
+  Easing,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
+
+import DrawerButton from '../components/DrawerButton';
 
 import { NavigationService } from '../api/NavigationService';
 import theme from '../constants/Theme';
@@ -19,6 +28,7 @@ export const primaryHeader = {
   headerTitleStyle: {
     fontWeight: '500',
   },
+  headerBackTitle: null,
 };
 
 const AuthNavigator = createStackNavigator(
@@ -55,7 +65,47 @@ const HomeStack = createStackNavigator(
     SearchCompany: {
       getScreen: () => require('./SearchCompany').default,
     },
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      ...primaryHeader,
+      headerTitle: (
+        <TextInput
+          style={{
+            flex: 1,
+            padding: 8,
+            backgroundColor: 'white',
+            borderRadius: 5,
+          }}
+        />
+      ),
+      headerRight: <DrawerButton navigation={navigation} />,
+    }),
+  }
+);
 
+const AdminHomeStack = createStackNavigator(
+  {
+    AdminHome: {
+      getScreen: () => require('./AdminHomeScreen').default,
+    },
+    AdminOverview: {
+      getScreen: () => require('./AdminOverviewScreen').default,
+    },
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      ...primaryHeader,
+      headerRight: <DrawerButton navigation={navigation} />,
+    }),
+  }
+);
+
+const BrandsStack = createStackNavigator(
+  {
+    BrandsHome: {
+      getScreen: () => require('./BrandsScreen').default,
+    },
     ProductDetail: {
       getScreen: () => require('./ProductDetailScreen').default,
     },
@@ -80,12 +130,16 @@ const FavoriteStack = createStackNavigator(
   }
 );
 
+const DrawerNavigator = createDrawerNavigator({
+  DailyFashion: {
+    getScreen: () => require('./DailyFashionScreen').default,
+  },
+});
+
 const TabNavigator = createBottomTabNavigator(
   {
     Home: HomeStack,
-    Brands: {
-      getScreen: () => require('./BrandsScreen').default,
-    },
+    Brands: BrandsStack,
     Service: {
       getScreen: () => require('./ServiceScreen').default,
     },
@@ -127,6 +181,52 @@ const MainNavigator = createStackNavigator(
   }
 );
 
+const AdminTabNavigator = createBottomTabNavigator(
+  {
+    AdminHome: AdminHomeStack,
+    Upload: {
+      getScreen: () => require('./UploadScreen').default,
+    },
+    Messages: {
+      getScreen: () => require('./MessageScreen').default,
+    },
+    Settings: {
+      getScreen: () => require('./SettingsScreen').default,
+    },
+  },
+  {
+    // tabBarComponent: props => <TabBar {...props} />,
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused }) => {
+        const { routeName } = navigation.state;
+        return (
+          <Image
+            style={{ height: 25, width: 25 }}
+            source={tabBarIcons[focused ? 'active' : 'inactive'][routeName]}
+          />
+        );
+      },
+    }),
+    tabBarOptions: {
+      showLabel: false,
+      style: {
+        backgroundColor: theme.colors.grey,
+      },
+    },
+  }
+);
+
+const AdminNavigator = createStackNavigator(
+  {
+    Tab: AdminTabNavigator,
+  },
+  {
+    navigationOptions: {
+      header: null,
+    },
+  }
+);
+
 const AppNavigator = createSwitchNavigator(
   {
     Splash: {
@@ -134,6 +234,7 @@ const AppNavigator = createSwitchNavigator(
     },
     Auth: AuthNavigator,
     Main: MainNavigator,
+    Admin: AdminNavigator,
   },
   {
     initialRouteName: 'Splash',

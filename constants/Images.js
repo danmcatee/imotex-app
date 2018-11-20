@@ -8,6 +8,7 @@ export const images = {
   dailyInspirationTwo: require('../assets/images/di_2.png'),
   dailyInspirationThree: require('../assets/images/di_3.png'),
   newAtImotex: require('../assets/images/new_imotex.png'),
+  lens: require('../assets/images/lens.png'),
 };
 
 export const tabBarIcons = {
@@ -17,6 +18,10 @@ export const tabBarIcons = {
     Service: require('../assets/images/tabIcons/information_red.png'),
     Favorites: require('../assets/images/tabIcons/heart_red.png'),
     Settings: require('../assets/images/tabIcons/person_red.png'),
+    Menu: require('../assets/images/tabIcons/menu.png'),
+    AdminHome: require('../assets/images/tabIcons/x-icon_red.png'),
+    Messages: require('../assets/images/tabIcons/message_red.png'),
+    Upload: require('../assets/images/tabIcons/upload_red.png'),
   },
   inactive: {
     Home: require('../assets/images/tabIcons/x-icon.png'),
@@ -24,6 +29,10 @@ export const tabBarIcons = {
     Service: require('../assets/images/tabIcons/information.png'),
     Favorites: require('../assets/images/tabIcons/heart.png'),
     Settings: require('../assets/images/tabIcons/person.png'),
+    Menu: require('../assets/images/tabIcons/menu_grey.png'),
+    AdminHome: require('../assets/images/tabIcons/x-icon.png'),
+    Messages: require('../assets/images/tabIcons/message.png'),
+    Upload: require('../assets/images/tabIcons/upload.png'),
   },
 };
 

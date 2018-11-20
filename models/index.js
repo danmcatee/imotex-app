@@ -56,6 +56,9 @@ const Company = types
   })
   .views(self => {
     return {
+      productCount() {
+        return self.products.length;
+      },
       matchingProducts(cat) {
         return self.products.filter(
           product =>
@@ -72,6 +75,9 @@ const ProductStore = types
   })
   .views(self => {
     return {
+      getCompany(id) {
+        return self.companies.find(el => el.id === id);
+      },
       matchingCompanies(cat) {
         // console.log(cat);
         return self.companies.filter(

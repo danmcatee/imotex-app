@@ -157,6 +157,7 @@ export default [
   {
     id: '365',
     name: 'Dong Fang Import & Export GmbH',
+    contactPerson: 'Herr Meyer',
     products: [
       {
         id: '3651',

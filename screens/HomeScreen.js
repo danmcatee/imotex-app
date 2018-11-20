@@ -26,6 +26,7 @@ const listMenu = [
 class HomeScreen extends Component {
   static navigationOptions = {
     title: 'Daily Fashion',
+    headerLeft: null,
   };
   state = {};
   renderItem = ({ item }) => <ListMenuItem {...item} />;

@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: '600',
     fontSize: 20,
-    marginVertical: 10,
+    // marginVertical: 10,
     color: theme.colors.red,
   },
   categoryContainer: {
