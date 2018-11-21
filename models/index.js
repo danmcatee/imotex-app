@@ -25,6 +25,7 @@ const Product = types
     name: types.string,
     image: '',
     isFavorite: false,
+    sizes: types.array(types.string),
     categories: types.array(types.reference(Category)),
   })
   .views(self => {
