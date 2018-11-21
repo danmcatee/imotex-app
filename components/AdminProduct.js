@@ -1,8 +1,17 @@
 import React from 'react';
-import { TouchableOpacity, Image, StyleSheet, View, Text } from 'react-native';
+import {
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+} from 'react-native';
 
 import { productImgs, tabBarIcons } from '../constants/Images';
 import { observer } from 'mobx-react/native';
+import theme from '../constants/Theme';
+const { width, height } = Dimensions.get('window');
 
 const ProductLink = ({ product }) => {
   const companyId = product.id.slice(0, 3);
@@ -24,22 +33,25 @@ export default observer(ProductLink);
 
 const styles = StyleSheet.create({
   itemContainer: {
-    marginHorizontal: 5,
+    width: width / 2 - 30,
+    height: width / 2,
+    marginRight: 20,
   },
   image: {
-    height: 100,
-    width: 100,
-    // marginHorizontal: 5,
-    borderTopRightRadius: 10,
-    borderTopLeftRadius: 10,
+    flex: 1,
+    height: null,
+    width: null,
+    resizeMode: 'cover',
+
     position: 'relative',
   },
   button: {
-    backgroundColor: '#bfc1c6',
+    backgroundColor: theme.colors.lightGrey,
     padding: 2,
   },
   firstButton: {
     borderBottomWidth: 0.5,
+    borderBottomColor: theme.colors.midGrey,
   },
   buttonText: {
     textAlign: 'center',

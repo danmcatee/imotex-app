@@ -52,6 +52,7 @@ const Company = types
     contactPerson: '',
     website: '',
     email: '',
+    collections: types.array(types.string),
     products: types.array(Product),
   })
   .views(self => {
@@ -93,6 +94,38 @@ const ProductStore = types
         );
 
         return favorites;
+      },
+      getCategoryPickerObject() {
+        return self.categories.map(category => {
+          const obj = {};
+          obj.key = category.id;
+          obj.value = category.id;
+          obj.label = category.title;
+          return obj;
+        });
+      },
+      getSecondCategoryPickerObject(segment) {
+        return self.categories
+          .filter(category => category.id === segment)[0]
+          .values.map(subCategory => {
+            const obj = {};
+            obj.key = subCategory.id;
+            obj.value = subCategory.id;
+            obj.label = subCategory.title;
+            return obj;
+          });
+      },
+      getThirdCategoryPickerObject(segment, category) {
+        return self.categories
+          .filter(category => category.id === segment)[0]
+          .values.filter(subCategory => subCategory.id === category)[0]
+          .values.map(subSubCategory => {
+            const obj = {};
+            obj.key = subSubCategory.id;
+            obj.value = subSubCategory.id;
+            obj.label = subSubCategory.title;
+            return obj;
+          });
       },
     };
   });

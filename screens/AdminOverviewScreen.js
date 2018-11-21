@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  Dimensions,
 } from 'react-native';
 import { inject } from 'mobx-react/native';
 
@@ -16,6 +17,9 @@ import AdminProduct from '../components/AdminProduct';
 
 @inject('productStore')
 class AdminOverviewScreen extends Component {
+  static navigationOptions = {
+    title: 'Produktübersicht',
+  };
   state = {
     companyId: '365',
   };
@@ -25,10 +29,14 @@ class AdminOverviewScreen extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.count}>
-          <Text style={styles.countText}>
-            Produkte online: {company.productCount()}
-          </Text>
-          <Text style={styles.countText}>Produkte archiviert: 15</Text>
+          <View style={styles.countContainer}>
+            <Text style={styles.countText}>Produkte online:</Text>
+            <Text>{company.productCount()}</Text>
+          </View>
+          <View style={styles.countContainer}>
+            <Text style={styles.countText}>Produkte archiviert:</Text>
+            <Text>15</Text>
+          </View>
         </View>
         <View style={styles.ruler} />
 
@@ -50,18 +58,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 30,
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
+    backgroundColor: 'white',
   },
   count: {
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 20,
+  },
+  countContainer: {
+    width: '50%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   countText: {
     fontWeight: '500',
+    marginBottom: 5,
   },
   ruler: {
-    borderBottomWidth: 0.5,
-    borderBottomColor: '#bfc1c6',
+    borderBottomWidth: 0.2,
+    borderBottomColor: theme.colors.midGrey,
   },
   imgContainer: {
     marginVertical: 15,

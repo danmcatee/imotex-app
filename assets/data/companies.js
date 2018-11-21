@@ -158,6 +158,7 @@ export default [
     id: '365',
     name: 'Dong Fang Import & Export GmbH',
     contactPerson: 'Herr Meyer',
+    collections: ['Chalane', 'Absolut'],
     products: [
       {
         id: '3651',

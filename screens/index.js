@@ -22,7 +22,7 @@ import { tabBarIcons } from '../constants/Images';
 
 export const primaryHeader = {
   headerStyle: {
-    backgroundColor: theme.colors.grey,
+    backgroundColor: theme.colors.headerGrey,
   },
   headerTintColor: theme.colors.red,
   headerTitleStyle: {
@@ -91,6 +91,20 @@ const AdminHomeStack = createStackNavigator(
     },
     AdminOverview: {
       getScreen: () => require('./AdminOverviewScreen').default,
+    },
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      ...primaryHeader,
+      headerRight: <DrawerButton navigation={navigation} />,
+    }),
+  }
+);
+
+const UploadStack = createStackNavigator(
+  {
+    UploadHome: {
+      getScreen: () => require('./UploadScreen').default,
     },
   },
   {
@@ -184,9 +198,7 @@ const MainNavigator = createStackNavigator(
 const AdminTabNavigator = createBottomTabNavigator(
   {
     AdminHome: AdminHomeStack,
-    Upload: {
-      getScreen: () => require('./UploadScreen').default,
-    },
+    Upload: UploadStack,
     Messages: {
       getScreen: () => require('./MessageScreen').default,
     },
