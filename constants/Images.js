@@ -9,6 +9,7 @@ export const images = {
   dailyInspirationThree: require('../assets/images/di_3.png'),
   newAtImotex: require('../assets/images/new_imotex.png'),
   lens: require('../assets/images/lens.png'),
+  camera: require('../assets/images/camera.png'),
 };
 
 export const tabBarIcons = {
