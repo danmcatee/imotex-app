@@ -37,19 +37,20 @@ class UploadScreen extends Component {
     segment: '',
     category: '',
     product: '',
-
-    black: true,
-    red: false,
-    blue: false,
-    orange: false,
-    pink: false,
-    nature: false,
-    white: false,
-    grey: false,
-    green: false,
-    yellow: false,
-    brown: false,
-    jeans: false,
+    colors: {
+      black: true,
+      red: false,
+      blue: false,
+      orange: false,
+      pink: false,
+      nature: false,
+      white: false,
+      grey: false,
+      green: false,
+      yellow: false,
+      brown: false,
+      jeans: false,
+    },
   };
 
   _pickImage1 = async () => {
@@ -157,7 +158,9 @@ class UploadScreen extends Component {
   };
 
   selectColor = color => {
-    this.setState({ [color]: !this.state[color] });
+    this.setState({
+      colors: { ...this.state.colors, [color]: !this.state.colors[color] },
+    });
   };
 
   render() {
@@ -283,7 +286,7 @@ class UploadScreen extends Component {
               this.setState({ colorSection: !this.state.colorSection })
             }
             colorSection={this.state.colorSection}
-            colors={this.state}
+            colors={this.state.colors}
             selectColor={this.selectColor}
           />
           <SizePicker

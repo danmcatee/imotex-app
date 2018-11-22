@@ -1,5 +1,5 @@
 import { CurrentUser } from './CurrentUser';
-import { types, getParent } from 'mobx-state-tree';
+import { types, getParent, destroy } from 'mobx-state-tree';
 
 import categories from '../assets/data/categories';
 import companies from '../assets/data/companies';
@@ -66,6 +66,13 @@ const Company = types
           product =>
             product.categories.filter(category => category.id === cat).length
         );
+      },
+    };
+  })
+  .actions(self => {
+    return {
+      deleteProduct(product) {
+        destroy(product);
       },
     };
   });

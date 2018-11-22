@@ -13,13 +13,16 @@ import { observer } from 'mobx-react/native';
 import theme from '../constants/Theme';
 const { width, height } = Dimensions.get('window');
 
-const ProductLink = ({ product }) => {
+const ProductLink = ({ product, deleteProduct }) => {
   const companyId = product.id.slice(0, 3);
   const productPos = product.id.slice(-1);
   return (
     <View style={styles.itemContainer}>
       <Image source={productImgs[companyId][productPos]} style={styles.image} />
-      <TouchableOpacity style={[styles.button, styles.firstButton]}>
+      <TouchableOpacity
+        style={[styles.button, styles.firstButton]}
+        onPress={() => deleteProduct(product)}
+      >
         <Text style={styles.buttonText}>L&ouml;schen</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button}>

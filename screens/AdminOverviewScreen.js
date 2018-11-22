@@ -8,7 +8,7 @@ import {
   ScrollView,
   Dimensions,
 } from 'react-native';
-import { inject } from 'mobx-react/native';
+import { inject, observer } from 'mobx-react/native';
 
 import theme from '../constants/Theme';
 import { productImgs } from '../constants/Images';
@@ -16,6 +16,7 @@ import { NavigationService } from '../api/NavigationService';
 import AdminProduct from '../components/AdminProduct';
 
 @inject('productStore')
+@observer
 class AdminOverviewScreen extends Component {
   static navigationOptions = {
     title: 'Produktübersicht',
@@ -46,7 +47,11 @@ class AdminOverviewScreen extends Component {
           style={styles.imgContainer}
         >
           {company.products.map(product => (
-            <AdminProduct key={product.id} product={product} />
+            <AdminProduct
+              key={product.id}
+              product={product}
+              deleteProduct={company.deleteProduct}
+            />
           ))}
         </ScrollView>
       </View>
