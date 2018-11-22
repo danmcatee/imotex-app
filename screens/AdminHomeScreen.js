@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { inject } from 'mobx-react/native';
+import { inject, observer } from 'mobx-react/native';
 
 import { NavigationService } from '../api/NavigationService';
 import theme from '../constants/Theme';
 import { images } from '../constants/Images';
 
 @inject('productStore')
+@observer
 class AdminHomeScreen extends Component {
   state = {
     companyId: '365',
