@@ -37,6 +37,19 @@ class UploadScreen extends Component {
     segment: '',
     category: '',
     product: '',
+
+    black: true,
+    red: false,
+    blue: false,
+    orange: false,
+    pink: false,
+    nature: false,
+    white: false,
+    grey: false,
+    green: false,
+    yellow: false,
+    brown: false,
+    jeans: false,
   };
 
   _pickImage1 = async () => {
@@ -141,6 +154,10 @@ class UploadScreen extends Component {
 
   _handleAdd = () => {
     this.setState({ product: '', category: '' });
+  };
+
+  selectColor = color => {
+    this.setState({ [color]: !this.state[color] });
   };
 
   render() {
@@ -266,6 +283,8 @@ class UploadScreen extends Component {
               this.setState({ colorSection: !this.state.colorSection })
             }
             colorSection={this.state.colorSection}
+            colors={this.state}
+            selectColor={this.selectColor}
           />
           <SizePicker
             onPress={() =>
