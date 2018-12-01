@@ -81,6 +81,7 @@ const ProductStore = types
   .model('ProductStore', {
     companies: types.array(Company),
     categories: types.array(Category),
+    searchTerm: '',
   })
   .views(self => {
     return {
@@ -134,6 +135,13 @@ const ProductStore = types
             obj.label = subSubCategory.title;
             return obj;
           });
+      },
+    };
+  })
+  .actions(self => {
+    return {
+      setSearchTerm(searchString) {
+        self.searchTerm = searchString;
       },
     };
   });

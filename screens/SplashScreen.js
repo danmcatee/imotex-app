@@ -13,7 +13,7 @@ class SplashScreen extends Component {
 
   checkAuth = () => {
     setTimeout(() => {
-      this.props.navigation.navigate('Admin');
+      this.props.navigation.navigate('Login');
     }, 2000);
   };
 

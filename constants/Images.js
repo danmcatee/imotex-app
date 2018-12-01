@@ -10,6 +10,10 @@ export const images = {
   newAtImotex: require('../assets/images/new_imotex.png'),
   lens: require('../assets/images/lens.png'),
   camera: require('../assets/images/camera.png'),
+  smallBoxes: require('../assets/images/small_boxes.png'),
+  Profil: require('../assets/images/PROFIL.png'),
+  Service: require('../assets/images/SERVICE.png'),
+  Nachrichten: require('../assets/images/NACHRICHT.png'),
 };
 
 export const tabBarIcons = {
@@ -23,6 +27,7 @@ export const tabBarIcons = {
     AdminHome: require('../assets/images/tabIcons/x-icon_red.png'),
     Messages: require('../assets/images/tabIcons/message_red.png'),
     Upload: require('../assets/images/tabIcons/upload_red.png'),
+    Filter: require('../assets/images/filter_red.png'),
   },
   inactive: {
     Home: require('../assets/images/tabIcons/x-icon.png'),
@@ -34,6 +39,7 @@ export const tabBarIcons = {
     AdminHome: require('../assets/images/tabIcons/x-icon.png'),
     Messages: require('../assets/images/tabIcons/message.png'),
     Upload: require('../assets/images/tabIcons/upload.png'),
+    Filter: require('../assets/images/filter_grey.png'),
   },
 };
 

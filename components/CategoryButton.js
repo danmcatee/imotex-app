@@ -3,12 +3,17 @@ import { TouchableOpacity, View, Text, Image, StyleSheet } from 'react-native';
 
 import { images } from '../constants/Images';
 import { NavigationService } from '../api/NavigationService';
+import Theme from '../constants/Theme';
 
 class CategoryButton extends PureComponent {
   render() {
     const underline = this.props.nounderline
       ? null
-      : { borderBottomWidth: 0.5 };
+      : {
+          borderBottomWidth: 0.5,
+          borderColor: Theme.colors.midGrey,
+          paddingVertical: 5,
+        };
     return (
       <TouchableOpacity
         onPress={() => NavigationService.navigate('SearchCompany')}

@@ -33,6 +33,11 @@ class LoginScreen extends Component {
       this.state.password.toLowerCase() === 'password'
     ) {
       NavigationService.navigate('Main');
+    } else if (
+      this.state.username.toLowerCase() === 'admin' &&
+      this.state.password.toLowerCase() === 'password'
+    ) {
+      NavigationService.navigate('Admin');
     } else {
       this.setState({ loginError: true });
     }

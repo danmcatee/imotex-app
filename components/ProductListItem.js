@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 import { images } from '../constants/Images';
 import { NavigationService } from '../api/NavigationService';
+import Theme from '../constants/Theme';
 
 class ProductListItem extends PureComponent {
   handlePress = () => {
@@ -30,6 +31,7 @@ class ProductListItem extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     borderBottomWidth: 0.5,
+    borderColor: Theme.colors.midGrey,
   },
   touchable: {
     marginBottom: 10,

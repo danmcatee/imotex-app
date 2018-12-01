@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
-
-import Box from '../commons/Box';
+import { Text, View, Image } from 'react-native';
+import { images } from '../constants/Images';
 
 class SettingsScreen extends Component {
+  static navigationOptions = {
+    title: 'Einstellungen',
+  };
   state = {};
   render() {
     return (
-      <Box>
-        <Text>SettingsScreen</Text>
-      </Box>
+      <View
+        style={{ flex: 1, backgroundColor: 'white', justifyContent: 'center' }}
+      >
+        <Image
+          source={images.Profil}
+          style={{ width: null, heigth: null, resizeMode: 'contain' }}
+        />
+      </View>
     );
   }
 }

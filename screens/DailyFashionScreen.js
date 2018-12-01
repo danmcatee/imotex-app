@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   container: {
+    flexGrow: 1,
     paddingHorizontal: 10,
     justifyContent: 'space-between',
   },
@@ -116,12 +117,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     // marginVertical: 10,
     color: theme.colors.red,
+    marginVertical: 10,
   },
   categoryContainer: {
     borderBottomWidth: 0.5,
+    borderColor: theme.colors.midGrey,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    paddingVertical: 5,
   },
   item: {
     paddingVertical: 5,

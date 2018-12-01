@@ -11,6 +11,7 @@ import {
   Easing,
   TextInput,
   TouchableOpacity,
+  View,
 } from 'react-native';
 
 import DrawerButton from '../components/DrawerButton';
@@ -19,6 +20,7 @@ import { NavigationService } from '../api/NavigationService';
 import theme from '../constants/Theme';
 
 import { tabBarIcons } from '../constants/Images';
+import SearchBar from '../components/SearchBar';
 
 export const primaryHeader = {
   headerStyle: {
@@ -65,21 +67,29 @@ const HomeStack = createStackNavigator(
     SearchCompany: {
       getScreen: () => require('./SearchCompany').default,
     },
+    SearchResult: {
+      getScreen: () => require('./SearchResultScreen').default,
+    },
+    Filter: {
+      getScreen: () => require('./FilterScreen').default,
+    },
   },
+
   {
     navigationOptions: ({ navigation }) => ({
       ...primaryHeader,
-      headerTitle: (
-        <TextInput
-          style={{
-            flex: 1,
-            padding: 8,
-            backgroundColor: 'white',
-            borderRadius: 5,
-          }}
-        />
+      headerTitle: <SearchBar />,
+      headerRight: (
+        <View style={{ flexDirection: 'row', flex: 1 }}>
+          <TouchableOpacity
+            activeOpacity={1}
+            onPress={() => navigation.navigate('Filter')}
+          >
+            <Image source={tabBarIcons.inactive.Filter} />
+          </TouchableOpacity>
+          <DrawerButton navigation={navigation} />
+        </View>
       ),
-      headerRight: <DrawerButton navigation={navigation} />,
     }),
   }
 );
@@ -91,6 +101,20 @@ const AdminHomeStack = createStackNavigator(
     },
     AdminOverview: {
       getScreen: () => require('./AdminOverviewScreen').default,
+    },
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      ...primaryHeader,
+      headerRight: <DrawerButton navigation={navigation} />,
+    }),
+  }
+);
+
+const MessageStack = createStackNavigator(
+  {
+    MessageHome: {
+      getScreen: () => require('./MessageScreen').default,
     },
   },
   {
@@ -144,6 +168,32 @@ const FavoriteStack = createStackNavigator(
   }
 );
 
+const SettingsStack = createStackNavigator(
+  {
+    SettingsHome: {
+      getScreen: () => require('./SettingsScreen').default,
+    },
+  },
+  {
+    navigationOptions: {
+      ...primaryHeader,
+    },
+  }
+);
+
+const ServiceStack = createStackNavigator(
+  {
+    ServiceHome: {
+      getScreen: () => require('./ServiceScreen').default,
+    },
+  },
+  {
+    navigationOptions: {
+      ...primaryHeader,
+    },
+  }
+);
+
 const DrawerNavigator = createDrawerNavigator({
   DailyFashion: {
     getScreen: () => require('./DailyFashionScreen').default,
@@ -154,13 +204,9 @@ const TabNavigator = createBottomTabNavigator(
   {
     Home: HomeStack,
     Brands: BrandsStack,
-    Service: {
-      getScreen: () => require('./ServiceScreen').default,
-    },
+    Service: ServiceStack,
     Favorites: FavoriteStack,
-    Settings: {
-      getScreen: () => require('./SettingsScreen').default,
-    },
+    Settings: SettingsStack,
   },
   {
     // tabBarComponent: props => <TabBar {...props} />,
@@ -199,12 +245,8 @@ const AdminTabNavigator = createBottomTabNavigator(
   {
     AdminHome: AdminHomeStack,
     Upload: UploadStack,
-    Messages: {
-      getScreen: () => require('./MessageScreen').default,
-    },
-    Settings: {
-      getScreen: () => require('./SettingsScreen').default,
-    },
+    Messages: MessageStack,
+    Settings: SettingsStack,
   },
   {
     // tabBarComponent: props => <TabBar {...props} />,
