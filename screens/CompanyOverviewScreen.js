@@ -1,29 +1,36 @@
 import React, { Component } from 'react';
 import {
-  Text,
   View,
+  Text,
   ScrollView,
   StyleSheet,
-  Dimensions,
-  TouchableOpacity,
   FlatList,
   Image,
+  TouchableOpacity,
+  Dimensions,
 } from 'react-native';
-
-import { inject, observer } from 'mobx-react/native';
-import ProductLink from '../components/ProductLink';
-import { NavigationService } from '../api/NavigationService';
 import { productImgs, tabBarIcons } from '../constants/Images';
+import { observer, inject } from 'mobx-react/native';
 
 @inject('productStore')
 @observer
-class SearchResultScreen extends Component {
+class CompanyOverview extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.getParam('company').name,
+    };
+  };
+
   state = {
     itemWidth: (Dimensions.get('window').width - 20) / 3,
   };
 
+  componentDidMount() {
+    const { width } = Dimensions.get('window');
+    this.setState({ itemWidth: (width - 20) / 3 });
+  }
+
   renderItem = ({ item }) => {
-    console.log(item);
     const companyId = item.id.slice(0, 3);
     const productPos = item.id.slice(-1);
     return (
@@ -53,48 +60,39 @@ class SearchResultScreen extends Component {
       </View>
     );
   };
-
   render() {
     return (
       <FlatList
-        data={this.props.productStore.getSearchResults()}
+        data={this.props.navigation.getParam('company').products}
         numColumns={3}
         horizontal={false}
         renderItem={this.renderItem}
         keyExtractor={item => item.id}
         // keyExtractor={item => String(item.id)}
       />
+      // <ScrollView style={styles.imgContainer}>
+      //   {this.props.productStore.companies.map(company =>
+      //     company.favoriteProducts.map(product => (
+      //       <Image source={productImgs.P36212} style={styles.image} />
+      //     ))
+      //   )}
+      // </ScrollView>
     );
-    // const { searchTerm, companies } = this.props.productStore;
-    // console.log(this.props.productStore.getSearchResults());
     // return (
     //   <ScrollView contentContainerStyle={styles.container}>
-    //     {this.props.productStore.getSearchResults().map(product => (
+    //     {this.props.navigation.getParam('company').products.map(product => (
     //       <View style={styles.imgContainer}>
-    //         <ProductLink style={styles.img} product={product} />
+    //         <ProductLink
+    //           product={product}
+    //           onPress={() => this.handlePress(product)}
+    //           height={null}
+    //           width={null}
+    //           flex={1}
+    //           resizeMode={'cover'}
+    //         />
     //       </View>
     //     ))}
-    // {
-    /* {companies.map(company => {
-          const matchingProducts = company.products.filter(product =>
-            product.name.toLowerCase().includes(searchTerm.toLowerCase())
-          );
-          return matchingProducts.map(product => (
-            <View style={styles.imgContainer}>
-              <ProductLink
-                style={styles.img}
-                product={product}
-                onPress={() => this.handlePress(product)}
-                height={null}
-                width={null}
-                flex={1}
-                resizeMode={'cover'}
-              />
-            </View>
-          ));
-        })} */
-    // }
-    // </ScrollView>
+    //   </ScrollView>
     // );
   }
 }
@@ -113,4 +111,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchResultScreen;
+export default CompanyOverview;

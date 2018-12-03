@@ -147,6 +147,9 @@ const BrandsStack = createStackNavigator(
     ProductDetail: {
       getScreen: () => require('./ProductDetailScreen').default,
     },
+    CompanyOverview: {
+      getScreen: () => require('./CompanyOverviewScreen').default,
+    },
   },
   {
     navigationOptions: {

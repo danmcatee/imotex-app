@@ -7,6 +7,7 @@ import ColorPicker from '../components/ColorPicker';
 import SizePicker from '../components/SizePicker';
 
 import Box from '../commons/Box';
+import { inject, observer } from 'mobx-react/native';
 
 const RightHeader = ({ navigation }) => (
   <View style={{ flexDirection: 'row', flex: 1 }}>
@@ -20,35 +21,24 @@ const RightHeader = ({ navigation }) => (
   </View>
 );
 
+@inject('productStore')
+@observer
 class FilterScreen extends Component {
   state = {
     colorSection: false,
     sizeSection: false,
-    colors: {
-      black: true,
-      red: false,
-      blue: false,
-      orange: false,
-      pink: false,
-      nature: false,
-      white: false,
-      grey: false,
-      green: false,
-      yellow: false,
-      brown: false,
-      jeans: false,
-    },
   };
   selectColor = color => {
-    this.setState({
-      colors: { ...this.state.colors, [color]: !this.state.colors[color] },
-    });
+    this.props.productStore.filterOptions.colors.selectColor(color);
+    // this.setState({
+    //   colors: { ...this.state.colors, [color]: !this.state.colors[color] },
+    // });
   };
   render() {
     return (
       <View>
         <ColorPicker
-          colors={this.state.colors}
+          colors={this.props.productStore.filterOptions.colors}
           colorSection={this.state.colorSection}
           onPress={() =>
             this.setState({ colorSection: !this.state.colorSection })

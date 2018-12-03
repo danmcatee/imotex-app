@@ -11,6 +11,7 @@ import Collapsible from 'react-native-collapsible';
 
 import Theme from '../constants/Theme';
 import { images } from '../constants/Images';
+import { observer } from 'mobx-react/native';
 
 const { width } = Dimensions.get('window');
 
@@ -222,4 +223,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ColorPicker;
+export default observer(ColorPicker);

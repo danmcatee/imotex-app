@@ -116,13 +116,6 @@ class ProductDetailScreen extends Component {
               underlayColor="transparent"
             />
 
-            <TouchableOpacity
-              style={styles.catContainer}
-              onPress={product.toggleFav}
-            >
-              <Text style={styles.cat}>Merken</Text>
-              <Image source={images.startPageArrow} />
-            </TouchableOpacity>
             <TouchableOpacity style={styles.catContainer}>
               <Text style={styles.cat}>Unternehmen kontaktieren</Text>
               <Image source={images.startPageArrow} />

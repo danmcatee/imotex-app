@@ -3,6 +3,7 @@ import { types, getParent, destroy } from 'mobx-state-tree';
 
 import categories from '../assets/data/categories';
 import companies from '../assets/data/companies';
+import sizes from '../assets/data/sizes';
 
 const currentUser = CurrentUser.create();
 
@@ -77,11 +78,46 @@ const Company = types
     };
   });
 
+const Size = types.model('Size', {
+  german: types.string,
+  international: types.string,
+  inches: types.string,
+});
+
+const Colors = types
+  .model('Colors', {
+    black: false,
+    red: false,
+    blue: false,
+    orange: false,
+    pink: false,
+    nature: false,
+    white: false,
+    grey: false,
+    green: false,
+    yellow: false,
+    brown: false,
+    jeans: false,
+  })
+  .actions(self => {
+    return {
+      selectColor(color) {
+        return (self[color] = !self[color]);
+      },
+    };
+  });
+
+const FilterOptions = types.model('filterOptions', {
+  colors: Colors,
+  sizes: types.array(Size),
+});
+
 const ProductStore = types
   .model('ProductStore', {
     companies: types.array(Company),
     categories: types.array(Category),
     searchTerm: '',
+    filterOptions: FilterOptions,
   })
   .views(self => {
     return {
@@ -103,6 +139,18 @@ const ProductStore = types
         );
 
         return favorites;
+      },
+      getSearchResults() {
+        const matching = [];
+        self.companies.map(company => {
+          const matchingProducts = company.products.filter(product =>
+            product.name.toLowerCase().includes(self.searchTerm.toLowerCase())
+          );
+          matching.push(...matchingProducts);
+          return matchingProducts;
+        });
+
+        return matching;
       },
       getCategoryPickerObject() {
         return self.categories.map(category => {
@@ -145,9 +193,15 @@ const ProductStore = types
       },
     };
   });
+
+const filterOptions = FilterOptions.create({
+  sizes,
+});
+
 const productStore = ProductStore.create({
   companies,
   categories,
+  filterOptions,
 });
 
 export const store = {

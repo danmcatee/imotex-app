@@ -9,23 +9,19 @@ import {
 } from 'react-native';
 import { inject } from 'mobx-react/native';
 
-import { productImgs } from '../constants/Images';
+import { images } from '../constants/Images';
 import Theme from '../constants/Theme';
 import { NavigationService } from '../api/NavigationService';
 import ProductLink from '../components/ProductLink';
 
 @inject('productStore')
 class CompanyRow extends Component {
-  handlePress = product => {
-    NavigationService.navigate('ProductDetail', {
-      product,
+  handlePress = () => {
+    NavigationService.navigate('CompanyOverview', {
       company: this.props.company,
     });
   };
 
-  handleFav = product => {
-    product.toggleFav();
-  };
   render() {
     return (
       <View style={styles.container}>
@@ -35,13 +31,12 @@ class CompanyRow extends Component {
         {this.props.all && (
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {this.props.company.products.map(product => (
-              <ProductLink
-                key={product.id}
-                onPress={() => this.handlePress(product)}
-                handleFav={() => this.handleFav(product)}
-                product={product}
-              />
+              <ProductLink key={product.id} product={product} />
             ))}
+            <TouchableOpacity style={styles.more} onPress={this.handlePress}>
+              <Image source={images.Add} />
+              <Text style={styles.moreText}>ALLE ARTIKEL ANSEHEN</Text>
+            </TouchableOpacity>
           </ScrollView>
         )}
         {!this.props.all && (
@@ -49,11 +44,7 @@ class CompanyRow extends Component {
             {this.props.company
               .matchingProducts(this.props.category.id)
               .map(product => (
-                <ProductLink
-                  key={product.id}
-                  onPress={() => this.handlePress(product)}
-                  product={product}
-                />
+                <ProductLink key={product.id} product={product} />
               ))}
           </ScrollView>
         )}
@@ -82,6 +73,18 @@ const styles = StyleSheet.create({
     width: 100,
     marginHorizontal: 5,
     borderRadius: 10,
+  },
+  more: {
+    width: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  moreText: {
+    color: Theme.colors.red,
+    fontSize: 10,
+    fontWeight: '700',
+    textAlign: 'center',
+    marginTop: 10,
   },
 });
 

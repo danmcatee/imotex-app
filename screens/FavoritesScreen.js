@@ -22,21 +22,20 @@ class FavoritesScreen extends Component {
     favoriteProducts: [],
     itemWidth: 0,
   };
-  componentDidMount() {
-    const { width } = Dimensions.get('window');
-    this.setState({ itemWidth: width / 3 });
-  }
 
   renderItem = ({ item }) => {
     const companyId = item.id.slice(0, 3);
     const productPos = item.id.slice(-1);
     return (
-      <View>
+      <View style={{ paddingRight: 10, paddingBottom: 10 }}>
         <Image
           source={productImgs[companyId][productPos]}
           style={[
             styles.image,
-            { width: this.state.itemWidth, height: this.state.itemWidth },
+            {
+              width: this.state.itemWidth,
+              height: this.state.itemWidth,
+            },
           ]}
           resizeMode="contain"
         />
