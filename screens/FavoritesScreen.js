@@ -22,33 +22,45 @@ class FavoritesScreen extends Component {
     favoriteProducts: [],
     itemWidth: 0,
   };
+  componentDidMount() {
+    const { width } = Dimensions.get('window');
+    this.setState({ itemWidth: (width - 20) / 3 });
+  }
 
   renderItem = ({ item }) => {
     const companyId = item.id.slice(0, 3);
     const productPos = item.id.slice(-1);
+    const onPress = product => {
+      NavigationService.navigate('ProductDetail', {
+        product,
+        company: this.props.productStore.getCompany(companyId),
+      });
+    };
     return (
       <View style={{ paddingRight: 10, paddingBottom: 10 }}>
-        <Image
-          source={productImgs[companyId][productPos]}
-          style={[
-            styles.image,
-            {
-              width: this.state.itemWidth,
-              height: this.state.itemWidth,
-            },
-          ]}
-          resizeMode="contain"
-        />
-        <TouchableOpacity
-          onPress={item.toggleFav}
-          style={styles.heartContainer}
-        >
+        <TouchableOpacity onPress={() => onPress(item)}>
           <Image
-            source={
-              tabBarIcons[item.isFavorite ? 'active' : 'inactive'].Favorites
-            }
-            style={styles.heart}
+            source={productImgs[companyId][productPos]}
+            style={[
+              styles.image,
+              {
+                width: this.state.itemWidth,
+                height: this.state.itemWidth,
+              },
+            ]}
+            resizeMode="contain"
           />
+          <TouchableOpacity
+            onPress={item.toggleFav}
+            style={styles.heartContainer}
+          >
+            <Image
+              source={
+                tabBarIcons[item.isFavorite ? 'active' : 'inactive'].Favorites
+              }
+              style={styles.heart}
+            />
+          </TouchableOpacity>
         </TouchableOpacity>
       </View>
     );
