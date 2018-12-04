@@ -12,6 +12,7 @@ import {
 import RNPickerSelect from 'react-native-picker-select';
 import { inject } from 'mobx-react/native';
 import { ImagePicker, Permissions } from 'expo';
+import { HeaderBackButton } from 'react-navigation';
 
 import CategoryPicker from '../components/CategoryPicker';
 import ColorPicker from '../components/ColorPicker';
@@ -22,8 +23,16 @@ import Theme from '../constants/Theme';
 const { width, height } = Dimensions.get('window');
 @inject('productStore')
 class UploadScreen extends Component {
-  static navigationOptions = {
-    title: 'Dong Fang',
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'Dong Fang',
+      headerLeft: (
+        <HeaderBackButton
+          tintColor={Theme.colors.red}
+          onPress={() => navigation.navigate('AdminHome')}
+        />
+      ),
+    };
   };
   state = {
     companyId: '365',

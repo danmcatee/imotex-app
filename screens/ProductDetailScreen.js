@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Accordion from 'react-native-collapsible/Accordion';
+import { HeaderBackButton } from 'react-navigation';
 
 import { productImgs } from '../constants/Images';
 import theme from '../constants/Theme';
@@ -19,6 +20,12 @@ class ProductDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: navigation.getParam('company').name,
+      headerLeft: (
+        <HeaderBackButton
+          tintColor={theme.colors.red}
+          onPress={() => navigation.navigate('SearchCompany')}
+        />
+      ),
     };
   };
   state = {
