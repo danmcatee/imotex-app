@@ -37,12 +37,12 @@ const HomeStack = createStackNavigator(
       headerTitle: <SearchBar />,
       headerRight: (
         <View style={{ flexDirection: 'row', flex: 1 }}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             activeOpacity={1}
             onPress={() => navigation.navigate('Filter')}
           >
             <Image source={tabBarIcons.inactive.Filter} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <DrawerButton navigation={navigation} />
         </View>
       ),
