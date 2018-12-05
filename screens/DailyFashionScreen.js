@@ -28,7 +28,7 @@ class DailyFashionScreen extends Component {
   };
   // renderItem = ({ item }) => <ProductListItem {...item} />;
   _renderContent = section => (
-    <View style={{ marginTop: 20 }}>
+    <View style={{ marginTop: 10, paddingLeft: 20 }}>
       <ProductListItem category={{ title: 'Alle', id: section.id }} />
       <Accordion
         activeSections={this.state.activeSectionsSub}
@@ -51,7 +51,7 @@ class DailyFashionScreen extends Component {
   );
 
   _renderContentSub = section => (
-    <View>
+    <View style={{ marginTop: 10, paddingLeft: 20 }}>
       <ProductListItem category={{ title: 'Alle', id: section.id }} />
       {section.values.map(category => (
         <ProductListItem key={category.id} category={category} />
