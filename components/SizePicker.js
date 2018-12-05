@@ -16,7 +16,7 @@ import { womenPants } from '../assets/data/sizes';
 
 const { width } = Dimensions.get('window');
 
-const ColorPicker = ({ onPress, sizeSection }) => (
+const ColorPicker = ({ onPress, sizeSection, selectSize, sizes }) => (
   <View style={styles.sizesSection}>
     <TouchableOpacity onPress={onPress}>
       <View
@@ -50,19 +50,24 @@ const ColorPicker = ({ onPress, sizeSection }) => (
           <Text style={{ width: '33%', fontWeight: '600' }}>International</Text>
           <Text style={{ width: '33%', fontWeight: '600' }}>Inches</Text>
         </View>
-        {womenPants.map(size => (
-          <View
-            key={size.german}
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              marginBottom: 5,
-            }}
-          >
-            <Text style={{ width: '33%' }}>{size.german}</Text>
-            <Text style={{ width: '33%' }}>{size.international}</Text>
-            <Text style={{ width: '33%' }}>{size.inches}</Text>
-          </View>
+        {womenPants.map((size, index) => (
+          <TouchableOpacity onPress={() => selectSize(index)}>
+            <View
+              key={size.german}
+              style={[
+                {
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
+                  marginBottom: 5,
+                },
+                sizes[index] && styles.selected,
+              ]}
+            >
+              <Text style={{ width: '33%' }}>{size.german}</Text>
+              <Text style={{ width: '33%' }}>{size.international}</Text>
+              <Text style={{ width: '33%' }}>{size.inches}</Text>
+            </View>
+          </TouchableOpacity>
         ))}
       </View>
     </Collapsible>
@@ -76,6 +81,10 @@ const styles = StyleSheet.create({
   heading: {
     fontWeight: '700',
     fontSize: 16,
+  },
+  selected: {
+    borderWidth: 1,
+    borderColor: Theme.colors.red,
   },
 });
 

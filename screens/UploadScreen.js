@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Button,
+  TextInput,
 } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import { inject } from 'mobx-react/native';
@@ -19,6 +20,8 @@ import ColorPicker from '../components/ColorPicker';
 import SizePicker from '../components/SizePicker';
 import { images } from '../constants/Images';
 import Theme from '../constants/Theme';
+import { NavigationService } from '../api/NavigationService';
+import { womenPants } from '../assets/data/sizes';
 
 const { width, height } = Dimensions.get('window');
 @inject('productStore')
@@ -59,6 +62,26 @@ class UploadScreen extends Component {
       yellow: false,
       brown: false,
       jeans: false,
+    },
+    name: '',
+    desc: '',
+    sizes: {
+      '0': true,
+      '1': false,
+      '2': false,
+      '3': false,
+      '4': false,
+      '5': false,
+      '6': false,
+      '7': false,
+      '8': false,
+      '9': false,
+      '10': false,
+      '11': false,
+      '12': false,
+      '13': false,
+      '14': false,
+      '15': false,
     },
   };
 
@@ -164,6 +187,7 @@ class UploadScreen extends Component {
 
   _handleAdd = () => {
     this.setState({ product: '', category: '' });
+    NavigationService.navigate('AdminHome');
   };
 
   selectColor = color => {
@@ -172,7 +196,16 @@ class UploadScreen extends Component {
     });
   };
 
+  selectSize = index => {
+    const newState = this.state.sizes;
+    newState[index] = !newState[index];
+    this.setState({
+      sizes: newState,
+    });
+  };
+
   render() {
+    console.log(this.state.sizes);
     const { companyId } = this.state;
     const company = this.props.productStore.getCompany(companyId);
     const { categories } = this.props.productStore;
@@ -217,8 +250,24 @@ class UploadScreen extends Component {
             </TouchableOpacity>
           </View>
           <View style={styles.ruler} />
+          <View>
+            <Text style={styles.heading}>Name</Text>
+            <TextInput
+              style={styles.input}
+              onChangeText={text => this.setState({ name: text })}
+            />
+          </View>
+          <View>
+            <Text style={styles.heading}>Beschreibung</Text>
+            <TextInput
+              multiline={true}
+              numberOfLines={4}
+              style={[styles.input, { height: 100 }]}
+              onChangeText={text => this.setState({ desc: text })}
+            />
+          </View>
           <CategoryPicker
-            title="Kollektionen"
+            title="Kollektion"
             items={company.collections.map(collection => {
               const obj = {};
               obj.key = collection;
@@ -281,15 +330,7 @@ class UploadScreen extends Component {
               />
             </View>
           )}
-          {this.state.product && (
-            <View style={{ marginTop: 10 }}>
-              <Button
-                title="Hinzufügen"
-                onPress={this._handleAdd}
-                color="#A61B29"
-              />
-            </View>
-          )}
+
           <ColorPicker
             onPress={() =>
               this.setState({ colorSection: !this.state.colorSection })
@@ -303,7 +344,18 @@ class UploadScreen extends Component {
               this.setState({ sizeSection: !this.state.sizeSection })
             }
             sizeSection={this.state.sizeSection}
+            sizes={this.state.sizes}
+            selectSize={this.selectSize}
           />
+          {this.state.product && (
+            <View style={{ marginTop: 10 }}>
+              <Button
+                title="Hinzufügen"
+                onPress={this._handleAdd}
+                color="#A61B29"
+              />
+            </View>
+          )}
         </ScrollView>
       </View>
     );
@@ -350,10 +402,7 @@ const styles = StyleSheet.create({
   segmentSection: {
     marginTop: 20,
   },
-});
-
-const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
+  input: {
     fontSize: 16,
     paddingTop: 13,
     paddingHorizontal: 10,
@@ -363,6 +412,8 @@ const pickerSelectStyles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: 'white',
     color: 'black',
+    marginTop: 10,
+    marginBottom: 20,
   },
 });
 
