@@ -28,6 +28,9 @@ const HomeStack = createStackNavigator(
     SearchResult: {
       getScreen: () => require('../SearchResultScreen').default,
     },
+    ProductDetail: {
+      getScreen: () => require('../ProductDetailScreen').default,
+    },
     Filter: {
       getScreen: () => require('../FilterScreen').default,
     },
@@ -46,9 +49,7 @@ const BrandsStack = createStackNavigator(
     BrandsHome: {
       getScreen: () => require('../BrandsScreen').default,
     },
-    ProductDetail: {
-      getScreen: () => require('../ProductDetailScreen').default,
-    },
+
     CompanyOverview: {
       getScreen: () => require('../CompanyOverviewScreen').default,
     },
