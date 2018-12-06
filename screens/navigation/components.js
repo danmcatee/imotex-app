@@ -48,6 +48,13 @@ const CustomDrawer = props => (
             <Text style={styles.linkText}>{item.name}</Text>
           </TouchableOpacity>
         ))}
+      <TouchableOpacity
+        style={styles.link}
+        onPress={() => props.navigation.navigate('Login')}
+      >
+        <Image source={images.BackGrey} />
+        <Text style={styles.linkText}>Abmelden</Text>
+      </TouchableOpacity>
     </View>
   </SafeAreaView>
 );

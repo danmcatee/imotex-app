@@ -11,6 +11,7 @@ import { primaryHeader } from './options';
 import Theme from '../../constants/Theme';
 import { tabBarIcons } from '../../constants/Images';
 import DrawerButton from '../../components/DrawerButton';
+import { CustomDrawer } from './components';
 
 const AdminHomeStack = createStackNavigator(
   {
@@ -24,7 +25,6 @@ const AdminHomeStack = createStackNavigator(
   {
     navigationOptions: ({ navigation }) => ({
       ...primaryHeader,
-      headerRight: <DrawerButton navigation={navigation} />,
     }),
   }
 );
@@ -38,7 +38,6 @@ const MessageStack = createStackNavigator(
   {
     navigationOptions: ({ navigation }) => ({
       ...primaryHeader,
-      headerRight: <DrawerButton navigation={navigation} />,
     }),
   }
 );
@@ -52,7 +51,6 @@ const UploadStack = createStackNavigator(
   {
     navigationOptions: ({ navigation }) => ({
       ...primaryHeader,
-      headerRight: <DrawerButton navigation={navigation} />,
     }),
   }
 );
@@ -92,7 +90,10 @@ const AdminNavigator = createDrawerNavigator(
   },
   {
     drawerPosition: 'right',
-    drawerWidth: 200,
+    drawerWidth: 300,
+    contentComponent: ({ navigation }) => (
+      <CustomDrawer navigation={navigation} admin />
+    ),
     navigationOptions: {
       header: null,
     },
