@@ -30,6 +30,7 @@ class SearchResultScreen extends Component {
       NavigationService.navigate('ProductDetail', {
         product,
         company: this.props.productStore.getCompany(companyId),
+        back: 'SearchResult',
       });
     };
     return (

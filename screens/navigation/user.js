@@ -57,6 +57,7 @@ const BrandsStack = createStackNavigator(
   {
     navigationOptions: ({ navigation }) => ({
       ...primaryHeader,
+      headerTitle: <SearchBar />,
     }),
   }
 );

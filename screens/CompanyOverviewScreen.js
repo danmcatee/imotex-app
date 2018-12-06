@@ -18,7 +18,7 @@ import List from '../components/FlatList';
 class CompanyOverview extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: navigation.getParam('company').name,
+      headerTitle: navigation.getParam('company').name,
     };
   };
 
@@ -70,6 +70,7 @@ class CompanyOverview extends Component {
   //   );
   // };
   render() {
+    console.log(this.props.navigation.getParam('company'));
     return (
       <List
         data={this.props.navigation.getParam('company').products}
