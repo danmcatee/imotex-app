@@ -21,16 +21,15 @@ const userItems = [
   { name: 'Alles über die App', route: '' },
   { name: 'Datenschutz', route: '' },
   { name: 'Einstellungen', route: 'Settings' },
+  { name: 'Mieterbereich', route: 'AdminHome' },
 ];
 const adminItems = [
-  'DailyFashion',
-  'Brands',
-  'News',
-  'Service',
-  'Merkliste',
-  'Alles über die App',
-  'Datenschutz',
-  'Einstellungen',
+  { name: 'Übersicht', route: 'AdminHome' },
+  { name: 'Upload', route: 'Upload' },
+  { name: 'Nachrichten', route: 'Messages' },
+  { name: 'Datenschutz', route: '' },
+  { name: 'Einstellungen', route: 'Settings' },
+  { name: 'Einzelhändlerbereich', route: 'Home' },
 ];
 
 const CustomDrawer = props => (
@@ -40,6 +39,16 @@ const CustomDrawer = props => (
     <View style={styles.linkContainer}>
       {props.user &&
         userItems.map(item => (
+          <TouchableOpacity
+            style={styles.link}
+            onPress={() => props.navigation.navigate(item.route)}
+          >
+            <Image source={images.BackGrey} />
+            <Text style={styles.linkText}>{item.name}</Text>
+          </TouchableOpacity>
+        ))}
+      {props.admin &&
+        adminItems.map(item => (
           <TouchableOpacity
             style={styles.link}
             onPress={() => props.navigation.navigate(item.route)}

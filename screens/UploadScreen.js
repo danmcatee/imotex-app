@@ -205,7 +205,7 @@ class UploadScreen extends Component {
   };
 
   render() {
-    console.log(this.state.sizes);
+    console.log(this.state.img1);
     const { companyId } = this.state;
     const company = this.props.productStore.getCompany(companyId);
     const { categories } = this.props.productStore;
@@ -216,38 +216,66 @@ class UploadScreen extends Component {
           contentContainerStyle={styles.container}
         >
           <View style={styles.imgContainer}>
-            <TouchableOpacity onPress={this._pickImage1}>
-              <View style={styles.imgUpload}>
-                {!this.state.img1 && <Image source={images.camera} />}
-                {this.state.img1 && (
-                  <Image source={{ uri: this.state.img1 }} style={styles.img} />
-                )}
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this._pickImage2}>
-              <View style={styles.imgUpload}>
-                {!this.state.img1 && <Image source={images.camera} />}
-                {this.state.img2 && (
-                  <Image source={{ uri: this.state.img2 }} style={styles.img} />
-                )}
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this._pickImage3}>
-              <View style={styles.imgUpload}>
-                {!this.state.img1 && <Image source={images.camera} />}
-                {this.state.img3 && (
-                  <Image source={{ uri: this.state.img3 }} style={styles.img} />
-                )}
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this._pickImage4}>
-              <View style={styles.imgUpload}>
-                {!this.state.img1 && <Image source={images.camera} />}
-                {this.state.img4 && (
-                  <Image source={{ uri: this.state.img4 }} style={styles.img} />
-                )}
-              </View>
-            </TouchableOpacity>
+            {this.state.img1 && (
+              // <View style={styles.imgUpload}>
+              <Image
+                source={{ uri: this.state.img1 }}
+                style={styles.uploadedImg}
+              />
+              // </View>
+            )}
+            {!this.state.img1 && (
+              <TouchableOpacity onPress={this._pickImage1}>
+                <View style={styles.imgUpload}>
+                  <Image source={images.camera} />
+                </View>
+              </TouchableOpacity>
+            )}
+            {this.state.img2 && (
+              // <View style={styles.imgUpload}>
+              <Image
+                source={{ uri: this.state.img2 }}
+                style={styles.uploadedImg}
+              />
+              // </View>
+            )}
+            {!this.state.img2 && (
+              <TouchableOpacity onPress={this._pickImage2}>
+                <View style={styles.imgUpload}>
+                  <Image source={images.camera} />
+                </View>
+              </TouchableOpacity>
+            )}
+            {this.state.img3 && (
+              // <View style={styles.imgUpload}>
+              <Image
+                source={{ uri: this.state.img3 }}
+                style={styles.uploadedImg}
+              />
+              // </View>
+            )}
+            {!this.state.img3 && (
+              <TouchableOpacity onPress={this._pickImage3}>
+                <View style={styles.imgUpload}>
+                  <Image source={images.camera} />
+                </View>
+              </TouchableOpacity>
+            )}
+            {this.state.img4 && (
+              // <View style={styles.imgUpload}>
+              <Image
+                source={{ uri: this.state.img4 }}
+                style={styles.uploadedImg}
+              />
+              // </View>
+            )}
+            {!this.state.img4 && (
+              <TouchableOpacity onPress={this._pickImage4}>
+                <View style={styles.imgUpload}>
+                  <Image source={images.camera} />
+                </View>
+              </TouchableOpacity>
+            )}
           </View>
           <View style={styles.ruler} />
           <View>
@@ -380,6 +408,11 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  uploadedImg: {
+    width: width / 4 - 10,
+    height: width / 4 - 10,
+    borderRadius: 3,
   },
   img: {
     flex: 1,
