@@ -2,6 +2,7 @@ import React from 'react';
 import {
   createStackNavigator,
   createBottomTabNavigator,
+  createDrawerNavigator,
 } from 'react-navigation';
 import { View, TouchableOpacity, Image } from 'react-native';
 
@@ -11,6 +12,7 @@ import Theme from '../../constants/Theme';
 import { tabBarIcons } from '../../constants/Images';
 import DrawerButton from '../../components/DrawerButton';
 import SearchBar from '../../components/SearchBar';
+import { CustomDrawer } from './components';
 
 const HomeStack = createStackNavigator(
   {
@@ -35,17 +37,6 @@ const HomeStack = createStackNavigator(
     navigationOptions: ({ navigation }) => ({
       ...primaryHeader,
       headerTitle: <SearchBar />,
-      headerRight: (
-        <View style={{ flexDirection: 'row', flex: 1 }}>
-          {/* <TouchableOpacity
-            activeOpacity={1}
-            onPress={() => navigation.navigate('Filter')}
-          >
-            <Image source={tabBarIcons.inactive.Filter} />
-          </TouchableOpacity> */}
-          <DrawerButton navigation={navigation} />
-        </View>
-      ),
     }),
   }
 );
@@ -62,10 +53,11 @@ const BrandsStack = createStackNavigator(
       getScreen: () => require('../CompanyOverviewScreen').default,
     },
   },
+
   {
-    navigationOptions: {
+    navigationOptions: ({ navigation }) => ({
       ...primaryHeader,
-    },
+    }),
   }
 );
 
@@ -76,9 +68,9 @@ const FavoriteStack = createStackNavigator(
     },
   },
   {
-    navigationOptions: {
+    navigationOptions: ({ navigation }) => ({
       ...primaryHeader,
-    },
+    }),
   }
 );
 
@@ -89,9 +81,9 @@ const ServiceStack = createStackNavigator(
     },
   },
   {
-    navigationOptions: {
+    navigationOptions: ({ navigation }) => ({
       ...primaryHeader,
-    },
+    }),
   }
 );
 
@@ -124,15 +116,31 @@ const TabNavigator = createBottomTabNavigator(
   }
 );
 
-const MainNavigator = createStackNavigator(
+const MainNavigator = createDrawerNavigator(
   {
-    Tab: TabNavigator,
+    screen: TabNavigator,
   },
   {
+    drawerPosition: 'right',
+    drawerWidth: 300,
+    contentComponent: ({ navigation }) => (
+      <CustomDrawer navigation={navigation} user />
+    ),
     navigationOptions: {
       header: null,
     },
   }
 );
+
+// const MainNavigator = createStackNavigator(
+//   {
+//     Tab: TabNavigator,
+//   },
+//   {
+//     navigationOptions: {
+//       header: null,
+//     },
+//   }
+// );
 
 export { MainNavigator };

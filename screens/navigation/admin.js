@@ -3,6 +3,7 @@ import { Image } from 'react-native';
 import {
   createStackNavigator,
   createBottomTabNavigator,
+  createDrawerNavigator,
 } from 'react-navigation';
 
 import { SettingsStack } from './shared';
@@ -85,15 +86,28 @@ const AdminTabNavigator = createBottomTabNavigator(
   }
 );
 
-const AdminNavigator = createStackNavigator(
+const AdminNavigator = createDrawerNavigator(
   {
-    Tab: AdminTabNavigator,
+    screen: AdminTabNavigator,
   },
   {
+    drawerPosition: 'right',
+    drawerWidth: 200,
     navigationOptions: {
       header: null,
     },
   }
 );
+
+// const AdminNavigator = createStackNavigator(
+//   {
+//     Tab: AdminTabNavigator,
+//   },
+//   {
+//     navigationOptions: {
+//       header: null,
+//     },
+//   }
+// );
 
 export { AdminNavigator };

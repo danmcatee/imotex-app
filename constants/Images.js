@@ -15,6 +15,7 @@ export const images = {
   Service: require('../assets/images/SERVICE.png'),
   Nachrichten: require('../assets/images/NACHRICHT.png'),
   Add: require('../assets/images/add.png'),
+  BackGrey: require('../assets/images/back_grey.png'),
 };
 
 export const tabBarIcons = {

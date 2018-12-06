@@ -1,3 +1,7 @@
+import React from 'react';
+import { View } from 'react-native';
+
+import DrawerButton from '../../components/DrawerButton';
 import Theme from '../../constants/Theme';
 
 const primaryHeader = {
@@ -9,6 +13,17 @@ const primaryHeader = {
     fontWeight: '500',
   },
   headerBackTitle: null,
+  headerRight: (
+    <View style={{ flexDirection: 'row', flex: 1 }}>
+      {/* <TouchableOpacity
+        activeOpacity={1}
+        onPress={() => navigation.navigate('Filter')}
+      >
+        <Image source={tabBarIcons.inactive.Filter} />
+      </TouchableOpacity> */}
+      <DrawerButton />
+    </View>
+  ),
 };
 
 export { primaryHeader };
