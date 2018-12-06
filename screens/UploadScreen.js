@@ -216,7 +216,7 @@ class UploadScreen extends Component {
           contentContainerStyle={styles.container}
         >
           <View style={styles.imgContainer}>
-            {this.state.img1 && (
+            {!!this.state.img1 && (
               // <View style={styles.imgUpload}>
               <Image
                 source={{ uri: this.state.img1 }}
@@ -224,58 +224,58 @@ class UploadScreen extends Component {
               />
               // </View>
             )}
-            {!this.state.img1 ? (
+            {!this.state.img1 && (
               <TouchableOpacity onPress={this._pickImage1}>
                 <View style={styles.imgUpload}>
                   <Image source={images.camera} />
                 </View>
               </TouchableOpacity>
-            ) : null}
-            {this.state.img2 ? (
+            )}
+            {!!this.state.img2 && (
               // <View style={styles.imgUpload}>
               <Image
                 source={{ uri: this.state.img2 }}
                 style={styles.uploadedImg}
               />
-            ) : // </View>
-            null}
-            {!this.state.img2 ? (
+              // </View>
+            )}
+            {!this.state.img2 && (
               <TouchableOpacity onPress={this._pickImage2}>
                 <View style={styles.imgUpload}>
                   <Image source={images.camera} />
                 </View>
               </TouchableOpacity>
-            ) : null}
-            {this.state.img3 ? (
+            )}
+            {!!this.state.img3 && (
               // <View style={styles.imgUpload}>
               <Image
                 source={{ uri: this.state.img3 }}
                 style={styles.uploadedImg}
               />
-            ) : // </View>
-            null}
-            {!this.state.img3 ? (
+              // </View>
+            )}
+            {!this.state.img3 && (
               <TouchableOpacity onPress={this._pickImage3}>
                 <View style={styles.imgUpload}>
                   <Image source={images.camera} />
                 </View>
               </TouchableOpacity>
-            ) : null}
-            {this.state.img4 ? (
+            )}
+            {!!this.state.img4 && (
               // <View style={styles.imgUpload}>
               <Image
                 source={{ uri: this.state.img4 }}
                 style={styles.uploadedImg}
               />
-            ) : // </View>
-            null}
-            {!this.state.img4 ? (
+              // </View>
+            )}
+            {!this.state.img4 && (
               <TouchableOpacity onPress={this._pickImage4}>
                 <View style={styles.imgUpload}>
                   <Image source={images.camera} />
                 </View>
               </TouchableOpacity>
-            ) : null}
+            )}
           </View>
           <View style={styles.ruler} />
           <View>
@@ -324,7 +324,7 @@ class UploadScreen extends Component {
               }}
             />
           </View>
-          {this.state.segment ? (
+          {!!this.state.segment && (
             <View style={styles.segmentSection}>
               <CategoryPicker
                 title="Produktkategorie"
@@ -340,8 +340,8 @@ class UploadScreen extends Component {
                 }}
               />
             </View>
-          ) : null}
-          {this.state.category ? (
+          )}
+          {!!this.state.category && (
             <View style={styles.segmentSection}>
               <CategoryPicker
                 title="Produkt"
@@ -357,7 +357,7 @@ class UploadScreen extends Component {
                 }}
               />
             </View>
-          ) : null}
+          )}
 
           <ColorPicker
             onPress={() =>
@@ -375,7 +375,7 @@ class UploadScreen extends Component {
             sizes={this.state.sizes}
             selectSize={this.selectSize}
           />
-          {this.state.product ? (
+          {!!this.state.product && (
             <View style={{ marginTop: 10 }}>
               <Button
                 title="Hinzufügen"
@@ -383,7 +383,7 @@ class UploadScreen extends Component {
                 color="#A61B29"
               />
             </View>
-          ) : null}
+          )}
         </ScrollView>
       </View>
     );
