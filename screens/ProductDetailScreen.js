@@ -23,7 +23,12 @@ class ProductDetailScreen extends Component {
       headerLeft: (
         <HeaderBackButton
           tintColor={theme.colors.red}
-          onPress={() => navigation.navigate('SearchCompany')}
+          onPress={() => {
+            if (navigation.getParam('back') === 'SearchResult') {
+              navigation.navigate('SearchResult');
+            }
+            navigation.navigate('SearchCompany');
+          }}
         />
       ),
     };
@@ -103,12 +108,15 @@ class ProductDetailScreen extends Component {
           <TouchableOpacity style={styles.button}>
             <Image source={images.smallBoxes} />
           </TouchableOpacity>
-          <Image
-            source={
-              tabBarIcons[product.isFavorite ? 'active' : 'inactive'].Favorites
-            }
-            style={styles.heart}
-          />
+          <TouchableOpacity onPress={() => product.toggleFav()}>
+            <Image
+              source={
+                tabBarIcons[product.isFavorite ? 'active' : 'inactive']
+                  .Favorites
+              }
+              style={styles.heart}
+            />
+          </TouchableOpacity>
         </View>
         <Text style={styles.collection}>KOLLEKTION: CHALENE</Text>
 
