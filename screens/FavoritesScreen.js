@@ -34,11 +34,12 @@ class FavoritesScreen extends Component {
       NavigationService.navigate('ProductDetail', {
         product,
         company: this.props.productStore.getCompany(companyId),
+        back: 'FavHome',
       });
     };
     return (
-      <View style={{ paddingRight: 10, paddingBottom: 10 }}>
-        <TouchableOpacity onPress={() => onPress(item)}>
+      <View style={{ paddingRight: 10, paddingBottom: 10, flex: 1 }}>
+        <TouchableOpacity onPress={() => onPress(item)} style={{ flex: 1 }}>
           <Image
             source={productImgs[companyId][productPos]}
             style={[

@@ -6,14 +6,18 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
+  Linking,
 } from 'react-native';
 import Accordion from 'react-native-collapsible/Accordion';
 import { HeaderBackButton } from 'react-navigation';
+import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet';
 
 import { productImgs } from '../constants/Images';
 import theme from '../constants/Theme';
 import { images, tabBarIcons } from '../constants/Images';
 import { observer } from 'mobx-react/native';
+
+const options = ['Abbrechen', 'Telefon', 'SMS', 'E-Mail'];
 
 @observer
 class ProductDetailScreen extends Component {
@@ -25,9 +29,12 @@ class ProductDetailScreen extends Component {
           tintColor={theme.colors.red}
           onPress={() => {
             if (navigation.getParam('back') === 'SearchResult') {
-              navigation.navigate('SearchResult');
+              return navigation.navigate('SearchResult');
             }
-            navigation.navigate('SearchCompany');
+            if (navigation.getParam('back') === 'FavHome') {
+              return navigation.navigate('FavHome');
+            }
+            return navigation.navigate('SearchCompany');
           }}
         />
       ),
@@ -40,6 +47,10 @@ class ProductDetailScreen extends Component {
       { title: 'Farben' },
       { title: 'Größen' },
     ],
+  };
+
+  showActionSheet = () => {
+    this.ActionSheet.show();
   };
 
   _renderContent = section => (
@@ -108,7 +119,10 @@ class ProductDetailScreen extends Component {
           <TouchableOpacity style={styles.button}>
             <Image source={images.smallBoxes} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => product.toggleFav()}>
+          <TouchableOpacity
+            onPress={() => product.toggleFav()}
+            style={styles.heartContainer}
+          >
             <Image
               source={
                 tabBarIcons[product.isFavorite ? 'active' : 'inactive']
@@ -131,10 +145,25 @@ class ProductDetailScreen extends Component {
               underlayColor="transparent"
             />
 
-            <TouchableOpacity style={styles.catContainer}>
+            <TouchableOpacity
+              style={styles.catContainer}
+              onPress={this.showActionSheet}
+            >
               <Text style={styles.cat}>Unternehmen kontaktieren</Text>
               <Image source={images.startPageArrow} />
             </TouchableOpacity>
+            <ActionSheet
+              ref={o => (this.ActionSheet = o)}
+              title="Unternehmen kontaktieren"
+              message="Wählen Sie aus verschiedenen Optionen das Unternehmen zu kontaktieren"
+              options={options}
+              cancelButtonIndex={0}
+              onPress={index => {
+                if (index === 1) Linking.openURL(`tel:067324640`);
+                if (index === 2) Linking.openURL(`sms:067324640`);
+                if (index === 3) Linking.openURL(`mailto:info@danmcatee.com`);
+              }}
+            />
             <TouchableOpacity style={styles.catContainer}>
               <Text style={styles.cat}>Unternehmensinformationen</Text>
               <Image source={images.startPageArrow} />
@@ -177,10 +206,12 @@ const styles = StyleSheet.create({
     width: '95%',
     position: 'relative',
   },
-  heart: {
+  heartContainer: {
     position: 'absolute',
     bottom: 10,
     left: 10,
+  },
+  heart: {
     height: 50,
     width: 50,
   },
