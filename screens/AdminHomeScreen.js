@@ -5,6 +5,7 @@ import { inject, observer } from 'mobx-react/native';
 import { NavigationService } from '../api/NavigationService';
 import theme from '../constants/Theme';
 import { images } from '../constants/Images';
+import Theme from '../constants/Theme';
 
 @inject('productStore')
 @observer
@@ -33,6 +34,18 @@ class AdminHomeScreen extends Component {
             <Image source={images.startPageArrow} />
           </View>
         </TouchableOpacity>
+        <View style={styles.archiveContainer}>
+          <Text style={styles.archiveHeading}>&Uuml;BERSICHT</Text>
+          <View style={styles.archiveMessage}>
+            <Text>Am 02.08.2018 werden 3 Bilder gel&ouml;scht</Text>
+          </View>
+          <View style={styles.archiveMessage}>
+            <Text>Am 10.08.2018 werden 9 Bilder gel&ouml;scht</Text>
+          </View>
+          <View style={styles.archiveMessage}>
+            <Text>Am 15.08.2018 werden 2 Bilder gel&ouml;scht</Text>
+          </View>
+        </View>
       </View>
     );
   }
@@ -52,10 +65,24 @@ const styles = StyleSheet.create({
     marginTop: 50,
     paddingBottom: 10,
     borderBottomWidth: 0.2,
-    borderBottomColor: theme.colors.midGrey,
+    borderBottomColor: Theme.colors.midGrey,
   },
   overviewHeading: {
     fontWeight: '700',
+  },
+  archiveContainer: {
+    marginTop: 50,
+  },
+  archiveHeading: {
+    paddingBottom: 20,
+    fontSize: 12,
+    color: Theme.colors.darkGrey,
+  },
+  archiveMessage: {
+    borderBottomWidth: 0.2,
+    borderBottomColor: Theme.colors.midGrey,
+    paddingBottom: 5,
+    marginBottom: 10,
   },
 });
 

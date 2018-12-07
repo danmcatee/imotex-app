@@ -16,7 +16,7 @@ import { womenPants } from '../assets/data/sizes';
 
 const { width } = Dimensions.get('window');
 
-const ColorPicker = ({ onPress, sizeSection, selectSize, sizes }) => (
+const ColorPicker = ({ onPress, sizeSection, selectSize, sizes, required }) => (
   <View style={styles.sizesSection}>
     <TouchableOpacity onPress={onPress}>
       <View
@@ -26,7 +26,10 @@ const ColorPicker = ({ onPress, sizeSection, selectSize, sizes }) => (
           alignItems: 'center',
         }}
       >
-        <Text style={styles.heading}>Größen</Text>
+        <Text style={styles.heading}>
+          Größen{' '}
+          {!!required && <Text style={{ color: Theme.colors.red }}>*</Text>}
+        </Text>
         <Image source={images.startPageArrow} />
       </View>
       <View

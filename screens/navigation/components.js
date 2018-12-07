@@ -34,12 +34,13 @@ const adminItems = [
 
 const CustomDrawer = props => (
   <SafeAreaView style={styles.container}>
-    <DrawerButton active end />
+    <DrawerButton inactive end />
     <Text style={styles.heading}>Willkommen Herr Mustermann</Text>
     <View style={styles.linkContainer}>
       {props.user &&
         userItems.map(item => (
           <TouchableOpacity
+            key={item.id}
             style={styles.link}
             onPress={() => props.navigation.navigate(item.route)}
           >
@@ -50,6 +51,7 @@ const CustomDrawer = props => (
       {props.admin &&
         adminItems.map(item => (
           <TouchableOpacity
+            key={item.id}
             style={styles.link}
             onPress={() => props.navigation.navigate(item.route)}
           >

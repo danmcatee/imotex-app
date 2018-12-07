@@ -15,7 +15,13 @@ import { observer } from 'mobx-react/native';
 
 const { width } = Dimensions.get('window');
 
-const ColorPicker = ({ onPress, colorSection, colors, selectColor }) => (
+const ColorPicker = ({
+  onPress,
+  colorSection,
+  colors,
+  selectColor,
+  required,
+}) => (
   <View style={styles.colorSection}>
     <TouchableOpacity onPress={onPress}>
       <View
@@ -25,7 +31,10 @@ const ColorPicker = ({ onPress, colorSection, colors, selectColor }) => (
           alignItems: 'center',
         }}
       >
-        <Text style={styles.heading}>Farben</Text>
+        <Text style={styles.heading}>
+          Farben{' '}
+          {!!required && <Text style={{ color: Theme.colors.red }}>*</Text>}
+        </Text>
         <Image source={images.startPageArrow} />
       </View>
       <View

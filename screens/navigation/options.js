@@ -21,7 +21,7 @@ const primaryHeader = {
       >
         <Image source={tabBarIcons.inactive.Filter} />
       </TouchableOpacity> */}
-      <DrawerButton />
+      <DrawerButton active />
     </View>
   ),
 };

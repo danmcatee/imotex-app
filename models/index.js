@@ -78,46 +78,46 @@ const Company = types
     };
   });
 
-const Size = types.model('Size', {
-  german: types.string,
-  international: types.string,
-  inches: types.string,
-});
+// const Size = types.model('Size', {
+//   german: types.string,
+//   international: types.string,
+//   inches: types.string,
+// });
 
-const Colors = types
-  .model('Colors', {
-    black: false,
-    red: false,
-    blue: false,
-    orange: false,
-    pink: false,
-    nature: false,
-    white: false,
-    grey: false,
-    green: false,
-    yellow: false,
-    brown: false,
-    jeans: false,
-  })
-  .actions(self => {
-    return {
-      selectColor(color) {
-        return (self[color] = !self[color]);
-      },
-    };
-  });
+// const Colors = types
+//   .model('Colors', {
+//     black: false,
+//     red: false,
+//     blue: false,
+//     orange: false,
+//     pink: false,
+//     nature: false,
+//     white: false,
+//     grey: false,
+//     green: false,
+//     yellow: false,
+//     brown: false,
+//     jeans: false,
+//   })
+//   .actions(self => {
+//     return {
+//       selectColor(color) {
+//         return (self[color] = !self[color]);
+//       },
+//     };
+//   });
 
-const FilterOptions = types.model('filterOptions', {
-  colors: Colors,
-  sizes: types.array(Size),
-});
+// const FilterOptions = types.model('filterOptions', {
+//   colors: Colors,
+//   sizes: types.array(Size),
+// });
 
 const ProductStore = types
   .model('ProductStore', {
     companies: types.array(Company),
     categories: types.array(Category),
     searchTerm: '',
-    filterOptions: FilterOptions,
+    // filterOptions: FilterOptions,
   })
   .views(self => {
     return {
@@ -194,14 +194,14 @@ const ProductStore = types
     };
   });
 
-const filterOptions = FilterOptions.create({
-  sizes,
-});
+// const filterOptions = FilterOptions.create({
+//   sizes,
+// });
 
 const productStore = ProductStore.create({
   companies,
   categories,
-  filterOptions,
+  // filterOptions,
 });
 
 export const store = {

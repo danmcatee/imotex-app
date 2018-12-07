@@ -1,17 +1,28 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
+import Theme from '../constants/Theme';
 
-const CategoryPicker = ({ title, items, label, onValueChange }) => (
+const CategoryPicker = ({
+  title,
+  items,
+  label,
+  onValueChange,
+  value,
+  required,
+}) => (
   <View>
-    <Text style={styles.heading}>{title}</Text>
+    <Text style={styles.heading}>
+      {title}
+      {!!required && <Text style={{ color: Theme.colors.red }}> *</Text>}
+    </Text>
     <View style={styles.collectionContainer}>
       <RNPickerSelect
         style={{ ...pickerSelectStyles }}
         items={items}
         placeholder={{
           label: label,
-          value: null,
+          value: value,
         }}
         onValueChange={onValueChange}
       />

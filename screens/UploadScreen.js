@@ -220,13 +220,21 @@ class UploadScreen extends Component {
               // <View style={styles.imgUpload}>
               <Image
                 source={{ uri: this.state.img1 }}
-                style={styles.uploadedImg}
+                style={[
+                  styles.uploadedImg,
+                  { borderWidth: 2, borderColor: Theme.colors.red },
+                ]}
               />
               // </View>
             )}
             {!this.state.img1 && (
               <TouchableOpacity onPress={this._pickImage1}>
-                <View style={styles.imgUpload}>
+                <View
+                  style={[
+                    styles.imgUpload,
+                    { borderWidth: 2, borderColor: Theme.colors.red },
+                  ]}
+                >
                   <Image source={images.camera} />
                 </View>
               </TouchableOpacity>
@@ -277,9 +285,12 @@ class UploadScreen extends Component {
               </TouchableOpacity>
             )}
           </View>
+          <Text style={{ color: Theme.colors.darkGrey, marginTop: 5 }}>
+            * Das erste Bild wird als Ihr Hauptbild genutzt
+          </Text>
           <View style={styles.ruler} />
           <View>
-            <Text style={styles.heading}>Name</Text>
+            <Text style={styles.heading}>Artikel</Text>
             <TextInput
               style={styles.input}
               onChangeText={text => this.setState({ name: text })}
@@ -296,6 +307,7 @@ class UploadScreen extends Component {
           </View>
           <CategoryPicker
             title="Kollektion"
+            required
             items={company.collections.map(collection => {
               const obj = {};
               obj.key = collection;
@@ -313,8 +325,10 @@ class UploadScreen extends Component {
           <View style={styles.segmentSection}>
             <CategoryPicker
               title="Produktsegment"
+              required
               items={this.props.productStore.getCategoryPickerObject()}
               label="Wählen Sie Ihr Produktsegment"
+              value={this.state.segment}
               onValueChange={value => {
                 this.setState({
                   segment: value,
@@ -328,10 +342,12 @@ class UploadScreen extends Component {
             <View style={styles.segmentSection}>
               <CategoryPicker
                 title="Produktkategorie"
+                required
                 items={this.props.productStore.getSecondCategoryPickerObject(
                   this.state.segment
                 )}
                 label="Wählen Sie Ihre Produktkategorie"
+                value={this.state.category}
                 onValueChange={value => {
                   this.setState({
                     category: value,
@@ -345,10 +361,12 @@ class UploadScreen extends Component {
             <View style={styles.segmentSection}>
               <CategoryPicker
                 title="Produkt"
+                required
                 items={this.props.productStore.getThirdCategoryPickerObject(
                   this.state.segment,
                   this.state.category
                 )}
+                value={this.state.product}
                 label="Wählen Sie Ihr Produkt"
                 onValueChange={value => {
                   this.setState({
@@ -363,6 +381,7 @@ class UploadScreen extends Component {
             onPress={() =>
               this.setState({ colorSection: !this.state.colorSection })
             }
+            required
             colorSection={this.state.colorSection}
             colors={this.state.colors}
             selectColor={this.selectColor}
@@ -371,6 +390,7 @@ class UploadScreen extends Component {
             onPress={() =>
               this.setState({ sizeSection: !this.state.sizeSection })
             }
+            required
             sizeSection={this.state.sizeSection}
             sizes={this.state.sizes}
             selectSize={this.selectSize}
