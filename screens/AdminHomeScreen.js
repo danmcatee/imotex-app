@@ -37,13 +37,13 @@ class AdminHomeScreen extends Component {
         <View style={styles.archiveContainer}>
           <Text style={styles.archiveHeading}>&Uuml;BERSICHT</Text>
           <View style={styles.archiveMessage}>
-            <Text>Am 02.08.2018 werden 3 Bilder gel&ouml;scht</Text>
+            <Text>Wird implementiert</Text>
           </View>
           <View style={styles.archiveMessage}>
-            <Text>Am 10.08.2018 werden 9 Bilder gel&ouml;scht</Text>
+            <Text>Wird implementiert</Text>
           </View>
           <View style={styles.archiveMessage}>
-            <Text>Am 15.08.2018 werden 2 Bilder gel&ouml;scht</Text>
+            <Text>Wird implementiert</Text>
           </View>
         </View>
       </View>

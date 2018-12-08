@@ -186,7 +186,16 @@ class UploadScreen extends Component {
   };
 
   _handleAdd = () => {
-    this.setState({ product: '', category: '' });
+    this.setState({
+      product: '',
+      category: '',
+      segment: '',
+      collection: '',
+      img1: '',
+      img2: '',
+      img3: '',
+      img4: '',
+    });
     NavigationService.navigate('AdminHome');
   };
 
@@ -204,7 +213,7 @@ class UploadScreen extends Component {
     });
   };
   render() {
-    console.log(this.segmentRef);
+    console.log(this.state.collection);
     const { companyId } = this.state;
     const company = this.props.productStore.getCompany(companyId);
     const { categories } = this.props.productStore;
@@ -304,6 +313,7 @@ class UploadScreen extends Component {
               onChangeText={text => this.setState({ desc: text })}
             />
           </View>
+
           <CategoryPicker
             title="Kollektion"
             required
@@ -320,6 +330,7 @@ class UploadScreen extends Component {
                 collection: value,
               });
             }}
+            value={this.state.collection}
           />
           <View style={styles.segmentSection}>
             <CategoryPicker

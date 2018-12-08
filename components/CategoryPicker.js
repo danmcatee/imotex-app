@@ -26,10 +26,10 @@ class CategoryPicker extends React.Component {
             items={items}
             placeholder={{
               label: label,
-              value: value,
+              value: null,
             }}
             onValueChange={onValueChange}
-            // value={value}
+            value={value}
           />
         </View>
       </View>
