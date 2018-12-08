@@ -48,6 +48,9 @@ export const tabBarIcons = {
 export const productImgs = {
   '372': {
     '1': require('../assets/images/products/apply/1.jpg'),
+    '11': require('../assets/images/products/apply/11.jpg'),
+    '12': require('../assets/images/products/apply/12.jpg'),
+    '13': require('../assets/images/products/apply/13.jpg'),
     '2': require('../assets/images/products/apply/2.jpg'),
     '3': require('../assets/images/products/apply/3.jpg'),
   },

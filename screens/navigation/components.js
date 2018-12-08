@@ -40,7 +40,7 @@ const CustomDrawer = props => (
       {props.user &&
         userItems.map(item => (
           <TouchableOpacity
-            key={item.id}
+            key={item.route}
             style={styles.link}
             onPress={() => props.navigation.navigate(item.route)}
           >
@@ -51,7 +51,7 @@ const CustomDrawer = props => (
       {props.admin &&
         adminItems.map(item => (
           <TouchableOpacity
-            key={item.id}
+            key={item.route}
             style={styles.link}
             onPress={() => props.navigation.navigate(item.route)}
           >

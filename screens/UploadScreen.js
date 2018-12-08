@@ -203,9 +203,8 @@ class UploadScreen extends Component {
       sizes: newState,
     });
   };
-
   render() {
-    console.log(this.state.img1);
+    console.log(this.segmentRef);
     const { companyId } = this.state;
     const company = this.props.productStore.getCompany(companyId);
     const { categories } = this.props.productStore;
@@ -395,7 +394,7 @@ class UploadScreen extends Component {
             sizes={this.state.sizes}
             selectSize={this.selectSize}
           />
-          {!!this.state.product && (
+          {!!this.state.product && !!this.state.img1 && this.state.collection && (
             <View style={{ marginTop: 10 }}>
               <Button
                 title="Hinzufügen"

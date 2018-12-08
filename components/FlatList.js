@@ -17,6 +17,7 @@ const List = ({ data, itemWidth, store }) => {
       NavigationService.navigate('ProductDetail', {
         product,
         company: store.getCompany(companyId),
+        back: 'CompanyOverview',
       });
     };
     return (

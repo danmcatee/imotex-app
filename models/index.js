@@ -161,6 +161,9 @@ const ProductStore = types
           return obj;
         });
       },
+      getCategoryName(id) {
+        return self.categories.filter(category => category.id === id)[0].title;
+      },
       getSecondCategoryPickerObject(segment) {
         return self.categories
           .filter(category => category.id === segment)[0]

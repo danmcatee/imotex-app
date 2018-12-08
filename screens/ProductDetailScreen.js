@@ -7,6 +7,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   Linking,
+  Dimensions,
+  FlatList,
 } from 'react-native';
 import Accordion from 'react-native-collapsible/Accordion';
 import { HeaderBackButton } from 'react-navigation';
@@ -34,6 +36,9 @@ class ProductDetailScreen extends Component {
             if (navigation.getParam('back') === 'FavHome') {
               return navigation.navigate('FavHome');
             }
+            if (navigation.getParam('back') === 'CompanyOverview') {
+              return navigation.navigate('CompanyOverview');
+            }
             return navigation.navigate('SearchCompany');
           }}
         />
@@ -41,6 +46,8 @@ class ProductDetailScreen extends Component {
     };
   };
   state = {
+    itemWidth: 0,
+    moreImages: false,
     activeSections: [],
     cats: [
       { title: 'Informationen' },
@@ -48,6 +55,11 @@ class ProductDetailScreen extends Component {
       { title: 'Größen' },
     ],
   };
+
+  componentDidMount() {
+    const { width } = Dimensions.get('window');
+    this.setState({ itemWidth: (width - 20) / 3 });
+  }
 
   showActionSheet = () => {
     this.ActionSheet.show();
@@ -103,22 +115,65 @@ class ProductDetailScreen extends Component {
       <Image source={images.startPageArrow} />
     </View>
   );
+  handleMoreImages = () => {
+    this.setState({ moreImages: !this.state.moreImages });
+  };
+
+  renderItem = ({ item, index }) => (
+    <View style={{ paddingRight: 10, paddingBottom: 10 }}>
+      {index === 0 ? (
+        <TouchableOpacity onPress={this.handleMoreImages}>
+          <Image
+            source={item}
+            style={[
+              styles.image,
+              {
+                width: this.state.itemWidth,
+                height: this.state.itemWidth,
+              },
+            ]}
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
+      ) : (
+        <Image
+          source={item}
+          style={[
+            styles.image,
+            {
+              width: this.state.itemWidth,
+              height: this.state.itemWidth,
+            },
+          ]}
+          resizeMode="contain"
+        />
+      )}
+    </View>
+  );
   render() {
     const product = this.props.navigation.getParam('product');
     const company = this.props.navigation.getParam('company');
     const companyId = product.id.slice(0, 3);
     const productPos = product.id.slice(-1);
     return (
-      <View style={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.container}
+        style={{ backgroundColor: 'white' }}
+      >
         <View style={styles.imgContainer}>
           <Image
             source={productImgs[companyId][productPos]}
             style={styles.mainImg}
-            resizeMode="cover"
+            resizeMode="contain"
           />
-          <TouchableOpacity style={styles.button}>
-            <Image source={images.smallBoxes} />
-          </TouchableOpacity>
+          {!this.state.moreImages && (
+            <TouchableOpacity
+              style={styles.button}
+              onPress={this.handleMoreImages}
+            >
+              <Image source={images.smallBoxes} />
+            </TouchableOpacity>
+          )}
           <TouchableOpacity
             onPress={() => product.toggleFav()}
             style={styles.heartContainer}
@@ -132,58 +187,106 @@ class ProductDetailScreen extends Component {
             />
           </TouchableOpacity>
         </View>
+        {!!this.state.moreImages && (
+          <FlatList
+            data={[
+              images.smallBoxes,
+              productImgs[companyId][productPos],
+              productImgs[companyId][productPos],
+              productImgs[companyId][productPos],
+            ]}
+            numColumns={3}
+            horizontal={false}
+            renderItem={this.renderItem}
+            keyExtractor={(item, index) => index}
+            // keyExtractor={item => String(item.id)}
+          />
+          // <View style={styles.moreImagesContainer}>
+          //   <Image
+          //     style={[
+          //       styles.moreImage,
+          //       {
+          //         width: this.state.itemWidth,
+          //         height: this.state.itemWidth,
+          //       },
+          //     ]}
+          //     resizeMode="contain"
+          //     source={productImgs[companyId][productPos]}
+          //   />
+          //   <Image
+          //     style={[
+          //       styles.moreImage,
+          //       {
+          //         width: this.state.itemWidth,
+          //         height: this.state.itemWidth,
+          //       },
+          //     ]}
+          //     resizeMode="contain"
+          //     source={productImgs[companyId][productPos]}
+          //   />
+          //   <Image
+          //     style={[
+          //       styles.moreImage,
+          //       {
+          //         width: this.state.itemWidth,
+          //         height: this.state.itemWidth,
+          //       },
+          //     ]}
+          //     resizeMode="contain"
+          //     source={productImgs[companyId][productPos]}
+          //   />
+          // </View>
+        )}
         <Text style={styles.collection}>KOLLEKTION: CHALENE</Text>
 
-        <ScrollView>
-          <View style={styles.description}>
-            <Accordion
-              activeSections={this.state.activeSections}
-              sections={this.state.cats}
-              renderHeader={this._renderHeader}
-              renderContent={this._renderContent}
-              onChange={activeSections => this.setState({ activeSections })}
-              underlayColor="transparent"
-            />
+        <View style={styles.description}>
+          <Accordion
+            activeSections={this.state.activeSections}
+            sections={this.state.cats}
+            renderHeader={this._renderHeader}
+            renderContent={this._renderContent}
+            onChange={activeSections => this.setState({ activeSections })}
+            underlayColor="transparent"
+          />
 
-            <TouchableOpacity
-              style={styles.catContainer}
-              onPress={this.showActionSheet}
-            >
-              <Text style={styles.cat}>Unternehmen kontaktieren</Text>
-              <Image source={images.startPageArrow} />
-            </TouchableOpacity>
-            <ActionSheet
-              ref={o => (this.ActionSheet = o)}
-              title="Unternehmen kontaktieren"
-              message="Wählen Sie aus verschiedenen Optionen das Unternehmen zu kontaktieren"
-              options={options}
-              cancelButtonIndex={0}
-              onPress={index => {
-                if (index === 1) Linking.openURL(`tel:067324640`);
-                if (index === 2) Linking.openURL(`sms:067324640`);
-                if (index === 3) Linking.openURL(`mailto:info@danmcatee.com`);
-              }}
-            />
-            <TouchableOpacity style={styles.catContainer}>
-              <Text style={styles.cat}>Unternehmensinformationen</Text>
-              <Image source={images.startPageArrow} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.catContainer}>
-              <Text style={styles.cat}>Pushnachrichten aktivieren</Text>
-              <Image source={images.startPageArrow} />
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-      </View>
+          <TouchableOpacity
+            style={styles.catContainer}
+            onPress={this.showActionSheet}
+          >
+            <Text style={styles.cat}>Unternehmen kontaktieren</Text>
+            <Image source={images.startPageArrow} />
+          </TouchableOpacity>
+          <ActionSheet
+            ref={o => (this.ActionSheet = o)}
+            title="Unternehmen kontaktieren"
+            message="Wählen Sie aus verschiedenen Optionen das Unternehmen zu kontaktieren"
+            options={options}
+            cancelButtonIndex={0}
+            onPress={index => {
+              if (index === 1) Linking.openURL(`tel:067324640`);
+              if (index === 2) Linking.openURL(`sms:067324640`);
+              if (index === 3) Linking.openURL(`mailto:info@danmcatee.com`);
+            }}
+          />
+          <TouchableOpacity style={styles.catContainer}>
+            <Text style={styles.cat}>Unternehmensinformationen</Text>
+            <Image source={images.startPageArrow} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.catContainer}>
+            <Text style={styles.cat}>Pushnachrichten aktivieren</Text>
+            <Image source={images.startPageArrow} />
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'stretch',
     backgroundColor: 'white',
+    flexGrow: 1,
   },
   collection: {
     paddingVertical: 5,
@@ -202,7 +305,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   imgContainer: {
-    flex: 1,
+    flex: 2,
     width: '95%',
     position: 'relative',
   },
@@ -222,6 +325,13 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     position: 'relative',
   },
+  moreImagesContainer: {
+    height: 100,
+    flexDirection: 'row',
+    paddingRight: 10,
+    marginBottom: 20,
+  },
+  moreImage: {},
   button: {
     position: 'absolute',
     width: 35,

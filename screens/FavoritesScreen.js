@@ -38,7 +38,7 @@ class FavoritesScreen extends Component {
       });
     };
     return (
-      <View style={{ paddingRight: 10, paddingBottom: 10, flex: 1 }}>
+      <View style={{ paddingRight: 10, paddingBottom: 10 }}>
         <TouchableOpacity onPress={() => onPress(item)} style={{ flex: 1 }}>
           <Image
             source={productImgs[companyId][productPos]}

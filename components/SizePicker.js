@@ -16,7 +16,7 @@ import { womenPants } from '../assets/data/sizes';
 
 const { width } = Dimensions.get('window');
 
-const ColorPicker = ({ onPress, sizeSection, selectSize, sizes, required }) => (
+const SizePicker = ({ onPress, sizeSection, selectSize, sizes, required }) => (
   <View style={styles.sizesSection}>
     <TouchableOpacity onPress={onPress}>
       <View
@@ -54,7 +54,7 @@ const ColorPicker = ({ onPress, sizeSection, selectSize, sizes, required }) => (
           <Text style={{ width: '33%', fontWeight: '600' }}>Inches</Text>
         </View>
         {womenPants.map((size, index) => (
-          <TouchableOpacity onPress={() => selectSize(index)}>
+          <TouchableOpacity onPress={() => selectSize(index)} key={size.german}>
             <View
               key={size.german}
               style={[
@@ -91,4 +91,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ColorPicker;
+export default SizePicker;
