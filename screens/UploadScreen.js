@@ -6,15 +6,19 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
+  TouchableHighlight,
   ScrollView,
   Button,
   TextInput,
+  Modal,
+  SafeAreaView,
 } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import { inject } from 'mobx-react/native';
 import { ImagePicker, Permissions } from 'expo';
 import { HeaderBackButton } from 'react-navigation';
 
+import UploadModal from '../components/UploadModal';
 import CategoryPicker from '../components/CategoryPicker';
 import ColorPicker from '../components/ColorPicker';
 import SizePicker from '../components/SizePicker';
@@ -83,6 +87,11 @@ class UploadScreen extends Component {
       '14': false,
       '15': false,
     },
+    modalVisible: false,
+  };
+
+  setModalVisible = visible => {
+    this.setState({ modalVisible: visible });
   };
 
   _pickImage1 = async () => {
@@ -186,6 +195,24 @@ class UploadScreen extends Component {
   };
 
   _handleAdd = () => {
+    const company = this.props.productStore.companies.find(
+      el => el.id === this.state.companyId
+    );
+
+    const product = {
+      id: company.id + (company.products.length + 1),
+      name: this.state.name,
+      desc: this.state.desc,
+      image: this.state.img1,
+      isFavorite: false,
+      // sizes: this.state.sizes,
+      categories: [this.state.segment, this.state.category, this.state.product],
+    };
+
+    console.log(product);
+
+    company.addProduct(product);
+
     this.setState({
       product: '',
       category: '',
@@ -195,7 +222,11 @@ class UploadScreen extends Component {
       img2: '',
       img3: '',
       img4: '',
+      name: '',
+      desc: '',
+      modalVisible: false,
     });
+
     NavigationService.navigate('AdminHome');
   };
 
@@ -219,10 +250,39 @@ class UploadScreen extends Component {
     const { categories } = this.props.productStore;
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.modalVisible}
+        >
+          <UploadModal
+            modalVisible={this.state.modalVisible}
+            setModalVisible={this.setModalVisible}
+            width={width}
+            segment={this.state.segment}
+            getCategoryName={this.props.productStore.getCategoryName}
+            getCategory={this.props.productStore.getCategory}
+            category={this.state.category}
+            product={this.state.product}
+            collection={this.state.collection}
+            imgs={[
+              this.state.img1,
+              this.state.img2,
+              this.state.img3,
+              this.state.img4,
+            ]}
+            name={this.state.name}
+            desc={this.state.desc}
+            add={this._handleAdd}
+          />
+        </Modal>
         <ScrollView
           style={{ flex: 1 }}
           contentContainerStyle={styles.container}
         >
+          <TouchableOpacity onPress={() => this.setModalVisible(true)}>
+            <Text>Vorschau</Text>
+          </TouchableOpacity>
           <View style={styles.imgContainer}>
             {!!this.state.img1 && (
               // <View style={styles.imgUpload}>
@@ -302,6 +362,7 @@ class UploadScreen extends Component {
             <TextInput
               style={styles.input}
               onChangeText={text => this.setState({ name: text })}
+              value={this.state.name}
             />
           </View>
           <View>
@@ -311,6 +372,7 @@ class UploadScreen extends Component {
               numberOfLines={4}
               style={[styles.input, { height: 100 }]}
               onChangeText={text => this.setState({ desc: text })}
+              value={this.state.desc}
             />
           </View>
 
@@ -409,7 +471,7 @@ class UploadScreen extends Component {
             <View style={{ marginTop: 10 }}>
               <Button
                 title="Hinzufügen"
-                onPress={this._handleAdd}
+                onPress={() => this.setModalVisible(true)}
                 color="#A61B29"
               />
             </View>

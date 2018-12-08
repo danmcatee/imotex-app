@@ -14,19 +14,32 @@ const currentUser = CurrentUser.create();
 // const categoryStore = CategoryStore.create({
 //   values: categories,
 // });
-const Category = types.model('Category', {
-  id: types.identifier,
-  title: types.string,
-  values: types.maybe(types.array(types.late(() => Category))),
-});
+const Category = types
+  .model('Category', {
+    id: types.identifier,
+    title: types.string,
+    values: types.maybe(types.array(types.late(() => Category))),
+  })
+  .views(self => {
+    return {
+      getCategoryName(id) {
+        return self.values.filter(category => category.id === id)[0].title;
+      },
+      getCategory(id) {
+        return self.values.find(category => category.id === id);
+      },
+    };
+  });
 
 const Product = types
   .model('Product', {
     id: types.identifier,
-    name: types.string,
+    name: types.maybe(types.string),
+    desc: types.maybe(types.string),
     image: '',
     isFavorite: false,
-    sizes: types.array(types.string),
+    fixed: false,
+    sizes: types.maybe(types.array(types.string)),
     categories: types.array(types.reference(Category)),
   })
   .views(self => {
@@ -74,6 +87,9 @@ const Company = types
     return {
       deleteProduct(product) {
         destroy(product);
+      },
+      addProduct(product) {
+        self.products.push(product);
       },
     };
   });
@@ -163,6 +179,9 @@ const ProductStore = types
       },
       getCategoryName(id) {
         return self.categories.filter(category => category.id === id)[0].title;
+      },
+      getCategory(id) {
+        return self.categories.find(category => category.id === id);
       },
       getSecondCategoryPickerObject(segment) {
         return self.categories

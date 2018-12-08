@@ -16,9 +16,13 @@ const { width, height } = Dimensions.get('window');
 const ProductLink = ({ product, deleteProduct }) => {
   const companyId = product.id.slice(0, 3);
   const productPos = product.id.slice(-1);
+  const imgSource = {
+    source: productImgs[companyId][productPos],
+  };
+  if (product.image[0] === 'f') imgSource.source = { uri: product.image };
   return (
     <View style={styles.itemContainer}>
-      <Image source={productImgs[companyId][productPos]} style={styles.image} />
+      <Image {...imgSource} style={styles.image} />
       <TouchableOpacity
         style={[styles.button, styles.firstButton]}
         onPress={() => deleteProduct(product)}
