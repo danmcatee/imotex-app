@@ -41,6 +41,7 @@ const Product = types
     fixed: false,
     sizes: types.maybe(types.array(types.string)),
     categories: types.array(types.reference(Category)),
+    created: '',
   })
   .views(self => {
     return {

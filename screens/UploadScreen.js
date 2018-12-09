@@ -13,6 +13,8 @@ import {
   Modal,
   SafeAreaView,
 } from 'react-native';
+import moment from 'moment';
+import 'moment/locale/de';
 import RNPickerSelect from 'react-native-picker-select';
 import { inject } from 'mobx-react/native';
 import { ImagePicker, Permissions } from 'expo';
@@ -199,6 +201,8 @@ class UploadScreen extends Component {
       el => el.id === this.state.companyId
     );
 
+    moment.locale('de');
+
     const product = {
       id: company.id + (company.products.length + 1),
       name: this.state.name,
@@ -207,6 +211,7 @@ class UploadScreen extends Component {
       isFavorite: false,
       // sizes: this.state.sizes,
       categories: [this.state.segment, this.state.category, this.state.product],
+      created: moment().format('L'),
     };
 
     console.log(product);
@@ -244,7 +249,6 @@ class UploadScreen extends Component {
     });
   };
   render() {
-    console.log(this.state.collection);
     const { companyId } = this.state;
     const company = this.props.productStore.getCompany(companyId);
     const { categories } = this.props.productStore;

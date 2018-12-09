@@ -9,6 +9,8 @@ import {
   Dimensions,
 } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
+import moment from 'moment';
+import 'moment/locale/de';
 
 import theme from '../constants/Theme';
 import { productImgs } from '../constants/Images';
@@ -24,34 +26,79 @@ class AdminOverviewScreen extends Component {
   state = {
     companyId: '365',
   };
+  company = this.props.productStore.getCompany(this.state.companyId);
+
+  archivedCount = () => {
+    const archived = [];
+    this.company.products.map(product => {
+      var due = moment(product.created, 'L').add(7, 'd');
+      if (due.diff(moment(), 'd') < 0) {
+        archived.push(product);
+      }
+    });
+    return archived.length;
+  };
+
+  onlineCount = () => {
+    const online = [];
+    this.company.products.map(product => {
+      var due = moment(product.created, 'L').add(7, 'd');
+      if (due.diff(moment(), 'd') >= 0) {
+        online.push(product);
+      }
+    });
+    return online.length;
+  };
+
+  dueSections = () => {
+    const sections = {};
+    this.company.products.map(product => {
+      var due = moment(product.created, 'L').add(7, 'd');
+      if (due.diff(moment(), 'd') >= 0) {
+        if (sections[due.fromNow()]) {
+          sections[due.fromNow()].push(product);
+        } else {
+          sections[due.fromNow()] = [];
+          sections[due.fromNow()].push(product);
+        }
+      }
+    });
+    return sections;
+  };
+
   render() {
-    const { companyId } = this.state;
-    const company = this.props.productStore.getCompany(companyId);
+    moment.locale('de');
     return (
       <View style={styles.container}>
         <View style={styles.count}>
           <View style={styles.countContainer}>
             <Text style={styles.countText}>Produkte online:</Text>
-            <Text>{company.productCount()}</Text>
+            <Text>{this.onlineCount()}</Text>
           </View>
           <View style={styles.countContainer}>
             <Text style={styles.countText}>Produkte archiviert:</Text>
-            <Text>15</Text>
+            <Text>{this.archivedCount()}</Text>
           </View>
         </View>
         <View style={styles.ruler} />
-
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={styles.imgContainer}
-        >
-          {company.products.map(product => (
-            <AdminProduct
-              key={product.id}
-              product={product}
-              deleteProduct={company.deleteProduct}
-            />
+        <ScrollView>
+          {Object.keys(this.dueSections()).map(section => (
+            <View>
+              <Text>{section}</Text>
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                style={styles.imgContainer}
+              >
+                {this.dueSections()[section].map(product => (
+                  <AdminProduct
+                    key={product.id}
+                    product={product}
+                    deleteProduct={this.company.deleteProduct}
+                  />
+                ))}
+              </ScrollView>
+            </View>
           ))}
         </ScrollView>
       </View>

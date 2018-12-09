@@ -7,6 +7,8 @@ import {
   Text,
   Dimensions,
 } from 'react-native';
+import moment from 'moment';
+import 'moment/locale/de';
 
 import { productImgs, tabBarIcons } from '../constants/Images';
 import { observer } from 'mobx-react/native';
