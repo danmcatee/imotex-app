@@ -49,6 +49,7 @@ class UploadScreen extends Component {
     img2: null,
     img3: null,
     img4: null,
+    img5: null,
     collection: '',
     colorSection: true,
     sizeSection: true,
@@ -196,6 +197,31 @@ class UploadScreen extends Component {
     }
   };
 
+  _pickImage5 = async () => {
+    const perms = await Permissions.askAsync(
+      Permissions.CAMERA,
+      Permissions.CAMERA_ROLL
+    );
+    console.log(perms);
+    // const status1 = await Permissions.askAsync(Permissions.CAMERA_ROLL).status;
+    // const status2 = await Permissions.askAsync(Permissions.CAMERA).status;
+    if (perms.status === 'granted') {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: true,
+        mediaTypes: 'Images',
+        aspect: [1, 1],
+      });
+
+      console.log(result);
+
+      if (!result.cancelled) {
+        this.setState({ img5: result.uri });
+      }
+    } else {
+      console.log('No Permission');
+    }
+  };
+
   _handleAdd = () => {
     const company = this.props.productStore.companies.find(
       el => el.id === this.state.companyId
@@ -227,6 +253,7 @@ class UploadScreen extends Component {
       img2: '',
       img3: '',
       img4: '',
+      img5: '',
       name: '',
       desc: '',
       modalVisible: false,
@@ -287,76 +314,120 @@ class UploadScreen extends Component {
           <TouchableOpacity onPress={() => this.setModalVisible(true)}>
             <Text>Vorschau</Text>
           </TouchableOpacity>
-          <View style={styles.imgContainer}>
-            {!!this.state.img1 && (
-              // <View style={styles.imgUpload}>
-              <Image
-                source={{ uri: this.state.img1 }}
-                style={[
-                  styles.uploadedImg,
-                  { borderWidth: 2, borderColor: Theme.colors.red },
-                ]}
-              />
-              // </View>
-            )}
-            {!this.state.img1 && (
-              <TouchableOpacity onPress={this._pickImage1}>
-                <View
-                  style={[
-                    styles.imgUpload,
-                    { borderWidth: 2, borderColor: Theme.colors.red },
-                  ]}
-                >
-                  <Image source={images.camera} />
-                </View>
-              </TouchableOpacity>
-            )}
-            {!!this.state.img2 && (
-              // <View style={styles.imgUpload}>
-              <Image
-                source={{ uri: this.state.img2 }}
-                style={styles.uploadedImg}
-              />
-              // </View>
-            )}
-            {!this.state.img2 && (
-              <TouchableOpacity onPress={this._pickImage2}>
-                <View style={styles.imgUpload}>
-                  <Image source={images.camera} />
-                </View>
-              </TouchableOpacity>
-            )}
-            {!!this.state.img3 && (
-              // <View style={styles.imgUpload}>
-              <Image
-                source={{ uri: this.state.img3 }}
-                style={styles.uploadedImg}
-              />
-              // </View>
-            )}
-            {!this.state.img3 && (
-              <TouchableOpacity onPress={this._pickImage3}>
-                <View style={styles.imgUpload}>
-                  <Image source={images.camera} />
-                </View>
-              </TouchableOpacity>
-            )}
-            {!!this.state.img4 && (
-              // <View style={styles.imgUpload}>
-              <Image
-                source={{ uri: this.state.img4 }}
-                style={styles.uploadedImg}
-              />
-              // </View>
-            )}
-            {!this.state.img4 && (
-              <TouchableOpacity onPress={this._pickImage4}>
-                <View style={styles.imgUpload}>
-                  <Image source={images.camera} />
-                </View>
-              </TouchableOpacity>
-            )}
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-around' }}
+          >
+            <View style={{ width: width / 2 - 10 }}>
+              {!!this.state.img1 && (
+                // <View style={styles.imgUpload}>
+                <TouchableOpacity onPress={this._pickImage1}>
+                  <Image
+                    source={{ uri: this.state.img1 }}
+                    style={{
+                      borderWidth: 2,
+                      borderColor: Theme.colors.red,
+                      width: width / 2 - 10,
+                      height: width / 2 - 10,
+                      borderRadius: 3,
+                    }}
+                  />
+                </TouchableOpacity>
+                // </View>
+              )}
+              {!this.state.img1 && (
+                <TouchableOpacity onPress={this._pickImage1}>
+                  <View
+                    style={{
+                      borderWidth: 2,
+                      borderColor: Theme.colors.red,
+                      backgroundColor: Theme.colors.darkGrey,
+                      borderRadius: 3,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      height: width / 2 - 10,
+                    }}
+                  >
+                    <Image source={images.camera} />
+                  </View>
+                </TouchableOpacity>
+              )}
+            </View>
+            <View style={{ width: width / 2 - 10 }}>
+              <View style={styles.imgContainer}>
+                {!!this.state.img2 && (
+                  // <View style={styles.imgUpload}>
+                  <TouchableOpacity onPress={this._pickImage2}>
+                    <Image
+                      source={{ uri: this.state.img2 }}
+                      style={styles.uploadedImg}
+                    />
+                  </TouchableOpacity>
+                  // </View>
+                )}
+                {!this.state.img2 && (
+                  <TouchableOpacity onPress={this._pickImage2}>
+                    <View style={styles.imgUpload}>
+                      <Image source={images.camera} />
+                    </View>
+                  </TouchableOpacity>
+                )}
+                {!!this.state.img3 && (
+                  // <View style={styles.imgUpload}>
+                  <TouchableOpacity onPress={this._pickImage3}>
+                    <Image
+                      source={{ uri: this.state.img3 }}
+                      style={styles.uploadedImg}
+                    />
+                  </TouchableOpacity>
+                  // </View>
+                )}
+                {!this.state.img3 && (
+                  <TouchableOpacity onPress={this._pickImage3}>
+                    <View style={styles.imgUpload}>
+                      <Image source={images.camera} />
+                    </View>
+                  </TouchableOpacity>
+                )}
+              </View>
+              <View style={styles.imgContainer}>
+                {!!this.state.img4 && (
+                  // <View style={styles.imgUpload}>
+                  <TouchableOpacity onPress={this._pickImage4}>
+                    <Image
+                      source={{ uri: this.state.img4 }}
+                      style={styles.uploadedImg}
+                    />
+                  </TouchableOpacity>
+                  // </View>
+                )}
+                {!this.state.img4 && (
+                  <TouchableOpacity onPress={this._pickImage4}>
+                    <View style={styles.imgUpload}>
+                      <Image source={images.camera} />
+                    </View>
+                  </TouchableOpacity>
+                )}
+                {!!this.state.img5 && (
+                  // <View style={styles.imgUpload}>
+                  <TouchableOpacity onPress={this._pickImage5}>
+                    <Image
+                      source={{ uri: this.state.img5 }}
+                      style={styles.uploadedImg}
+                    />
+                  </TouchableOpacity>
+                  // </View>
+                )}
+                {!this.state.img5 && (
+                  <TouchableOpacity onPress={this._pickImage5}>
+                    <View style={styles.imgUpload}>
+                      <Image source={images.camera} />
+                    </View>
+                  </TouchableOpacity>
+                )}
+              </View>
+            </View>
           </View>
+
           <Text style={{ color: Theme.colors.darkGrey, marginTop: 5 }}>
             * Das erste Bild wird als Ihr Hauptbild genutzt
           </Text>
@@ -495,7 +566,8 @@ const styles = StyleSheet.create({
   },
   imgContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
+    marginBottom: 10,
   },
   imgUpload: {
     width: width / 4 - 10,
