@@ -82,24 +82,26 @@ class AdminOverviewScreen extends Component {
         </View>
         <View style={styles.ruler} />
         <ScrollView>
-          {Object.keys(this.dueSections()).map(section => (
-            <View>
-              <Text>{section}</Text>
-              <ScrollView
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                style={styles.imgContainer}
-              >
-                {this.dueSections()[section].map(product => (
-                  <AdminProduct
-                    key={product.id}
-                    product={product}
-                    deleteProduct={this.company.deleteProduct}
-                  />
-                ))}
-              </ScrollView>
-            </View>
-          ))}
+          {Object.keys(this.dueSections())
+            .sort()
+            .map(section => (
+              <View>
+                <Text>{section}</Text>
+                <ScrollView
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  style={styles.imgContainer}
+                >
+                  {this.dueSections()[section].map(product => (
+                    <AdminProduct
+                      key={product.id}
+                      product={product}
+                      deleteProduct={this.company.deleteProduct}
+                    />
+                  ))}
+                </ScrollView>
+              </View>
+            ))}
         </ScrollView>
       </View>
     );
