@@ -3,7 +3,7 @@ import {
   Text,
   View,
   StyleSheet,
-  TouchableOpacity,
+  TouchableWithoutFeedback,
   Image,
   ScrollView,
   Dimensions,
@@ -16,6 +16,7 @@ import theme from '../constants/Theme';
 import { productImgs } from '../constants/Images';
 import { NavigationService } from '../api/NavigationService';
 import AdminProduct from '../components/AdminProduct';
+import Theme from '../constants/Theme';
 
 @inject('productStore')
 @observer
@@ -28,21 +29,26 @@ class AdminOverviewScreen extends Component {
   };
   company = this.props.productStore.getCompany(this.state.companyId);
 
-  archivedCount = () => {
+  getArchived = () => {
     const archived = [];
     this.company.products.map(product => {
-      var due = moment(product.created, 'L').add(7, 'd');
+      var due = moment(product.due, 'L');
       if (due.diff(moment(), 'd') < 0) {
         archived.push(product);
       }
     });
+    return archived;
+  };
+
+  archivedCount = () => {
+    const archived = this.getArchived();
     return archived.length;
   };
 
   onlineCount = () => {
     const online = [];
     this.company.products.map(product => {
-      var due = moment(product.created, 'L').add(7, 'd');
+      var due = moment(product.due, 'L');
       if (due.diff(moment(), 'd') >= 0) {
         online.push(product);
       }
@@ -51,15 +57,20 @@ class AdminOverviewScreen extends Component {
   };
 
   dueSections = () => {
+    moment.locale('de');
     const sections = {};
     this.company.products.map(product => {
-      var due = moment(product.created, 'L').add(7, 'd');
+      const due = moment(product.due, 'L');
+      const dueFormatted = moment(due).format('L');
+      const buildSectionName = `${dueFormatted} [${due
+        .fromNow()
+        .toUpperCase()}]`;
       if (due.diff(moment(), 'd') >= 0) {
-        if (sections[due.fromNow()]) {
-          sections[due.fromNow()].push(product);
+        if (sections[buildSectionName]) {
+          sections[buildSectionName].push(product);
         } else {
-          sections[due.fromNow()] = [];
-          sections[due.fromNow()].push(product);
+          sections[buildSectionName] = [];
+          sections[buildSectionName].push(product);
         }
       }
     });
@@ -75,17 +86,40 @@ class AdminOverviewScreen extends Component {
             <Text style={styles.countText}>Produkte online:</Text>
             <Text>{this.onlineCount()}</Text>
           </View>
-          <View style={styles.countContainer}>
-            <Text style={styles.countText}>Produkte archiviert:</Text>
-            <Text>{this.archivedCount()}</Text>
-          </View>
+          <TouchableWithoutFeedback
+            onPress={() =>
+              NavigationService.navigate('Archived', {
+                archived: this.getArchived(),
+              })
+            }
+          >
+            <View style={styles.countContainer}>
+              <Text style={styles.countText}>Produkte archiviert:</Text>
+              <Text>{this.archivedCount()}</Text>
+            </View>
+          </TouchableWithoutFeedback>
         </View>
         <View style={styles.ruler} />
         <ScrollView>
           {Object.keys(this.dueSections())
             .sort()
-            .map(section => (
-              <View>
+            .map((section, index) => (
+              <View
+                key={section}
+                style={[
+                  {
+                    paddingTop: 20,
+                    paddingBottom: 10,
+                    marginBottom: 20,
+                  },
+                  index !== Object.keys(this.dueSections()).length - 1
+                    ? {
+                        borderBottomWidth: 1,
+                        borderBottomColor: Theme.colors.midGrey,
+                      }
+                    : null,
+                ]}
+              >
                 <Text>{section}</Text>
                 <ScrollView
                   horizontal

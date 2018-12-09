@@ -73,7 +73,9 @@ class CompanyOverview extends Component {
     console.log(this.props.navigation.getParam('company'));
     return (
       <List
-        data={this.props.navigation.getParam('company').products}
+        data={this.props.productStore
+          .getCompany(this.props.navigation.getParam('company'))
+          .getProducts()}
         itemWidth={this.state.itemWidth}
         store={this.props.productStore}
       />

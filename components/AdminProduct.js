@@ -11,7 +11,7 @@ import moment from 'moment';
 import 'moment/locale/de';
 
 import { productImgs, tabBarIcons } from '../constants/Images';
-import { observer } from 'mobx-react/native';
+import { observer, inject } from 'mobx-react/native';
 import theme from '../constants/Theme';
 const { width, height } = Dimensions.get('window');
 
@@ -21,7 +21,8 @@ const ProductLink = ({ product, deleteProduct }) => {
   const imgSource = {
     source: productImgs[companyId][productPos],
   };
-  if (product.image[0] === 'f') imgSource.source = { uri: product.image };
+  if (product.images && product.images[0][0] === 'f')
+    imgSource.source = { uri: product.image };
   return (
     <View style={styles.itemContainer}>
       <Image {...imgSource} style={styles.image} />
@@ -31,14 +32,14 @@ const ProductLink = ({ product, deleteProduct }) => {
       >
         <Text style={styles.buttonText}>L&ouml;schen</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => product.extend()}>
         <Text style={styles.buttonText}>Verl&auml;ngern</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-export default observer(ProductLink);
+export default inject('productStore')(observer(ProductLink));
 
 const styles = StyleSheet.create({
   itemContainer: {

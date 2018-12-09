@@ -21,6 +21,9 @@ const AdminHomeStack = createStackNavigator(
     AdminOverview: {
       getScreen: () => require('../AdminOverviewScreen').default,
     },
+    Archived: {
+      getScreen: () => require('../ArchivedScreen').default,
+    },
   },
   {
     navigationOptions: ({ navigation }) => ({

@@ -75,7 +75,7 @@ class BrandsScreen extends Component {
         <TouchableOpacity
           onPress={() =>
             NavigationService.navigate('CompanyOverview', {
-              company: item,
+              company: item.id,
             })
           }
         >

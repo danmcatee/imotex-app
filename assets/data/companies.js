@@ -166,6 +166,7 @@ export default [
         categories: ['1', '103', '10304'],
         isFavorite: false,
         created: '20.11.2018',
+        due: '27.11.2018',
       },
       {
         id: '3652',
@@ -173,6 +174,7 @@ export default [
         categories: ['1', '102', '10204'],
         isFavorite: false,
         created: '07.10.2018',
+        due: '14.10.2018',
       },
       {
         id: '3653',
@@ -180,6 +182,7 @@ export default [
         categories: ['1', '103', '10304'],
         isFavorite: false,
         created: '07.12.2018',
+        due: '14.12.2018',
       },
       {
         id: '3654',
@@ -187,6 +190,7 @@ export default [
         categories: ['1', '103', '10304'],
         isFavorite: false,
         created: '05.12.2018',
+        due: '12.12.2018',
       },
       {
         id: '3655',
@@ -194,6 +198,7 @@ export default [
         categories: ['1', '103', '10304'],
         isFavorite: false,
         created: '06.12.2018',
+        due: '13.12.2018',
       },
     ],
   },

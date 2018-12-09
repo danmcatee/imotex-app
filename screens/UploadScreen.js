@@ -233,11 +233,18 @@ class UploadScreen extends Component {
       id: company.id + (company.products.length + 1),
       name: this.state.name,
       desc: this.state.desc,
-      image: this.state.img1,
+      images: [
+        this.state.img1,
+        this.state.img2,
+        this.state.img3,
+        this.state.img4,
+        this.state.img5,
+      ].filter(el => el != null),
       isFavorite: false,
       // sizes: this.state.sizes,
       categories: [this.state.segment, this.state.category, this.state.product],
       created: moment().format('L'),
+      due: moment().add(7, 'd'),
     };
 
     console.log(product);

@@ -18,7 +18,7 @@ class ServiceScreen extends Component {
       >
         <Image
           source={images.Service}
-          style={{ width: null, heigth: null, resizeMode: 'contain' }}
+          style={{ height: null, width: null, flex: 1, resizeMode: 'contain' }}
         />
       </View>
     );

@@ -7,7 +7,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { productImgs, tabBarIcons } from '../constants/Images';
-import { observer } from 'mobx-react/native';
+import { observer, Observer } from 'mobx-react/native';
 
 const List = ({ data, itemWidth, store }) => {
   const renderItem = ({ item }) => {
@@ -21,32 +21,37 @@ const List = ({ data, itemWidth, store }) => {
       });
     };
     return (
-      <View style={{ paddingRight: 10, paddingBottom: 10 }}>
-        <TouchableOpacity onPress={() => onPress(item)}>
-          <Image
-            source={productImgs[companyId][productPos]}
-            style={[
-              styles.image,
-              {
-                width: itemWidth,
-                height: itemWidth,
-              },
-            ]}
-            resizeMode="contain"
-          />
-          <TouchableOpacity
-            onPress={() => item.toggleFav()}
-            style={styles.heartContainer}
-          >
-            <Image
-              source={
-                tabBarIcons[item.isFavorite ? 'active' : 'inactive'].Favorites
-              }
-              style={styles.heart}
-            />
-          </TouchableOpacity>
-        </TouchableOpacity>
-      </View>
+      <Observer>
+        {() => (
+          <View style={{ paddingRight: 10, paddingBottom: 10 }}>
+            <TouchableOpacity onPress={() => onPress(item)}>
+              <Image
+                source={productImgs[companyId][productPos]}
+                style={[
+                  styles.image,
+                  {
+                    width: itemWidth,
+                    height: itemWidth,
+                  },
+                ]}
+                resizeMode="contain"
+              />
+              <TouchableOpacity
+                onPress={item.toggleFav}
+                style={styles.heartContainer}
+              >
+                <Image
+                  source={
+                    tabBarIcons[item.isFavorite ? 'active' : 'inactive']
+                      .Favorites
+                  }
+                  style={styles.heart}
+                />
+              </TouchableOpacity>
+            </TouchableOpacity>
+          </View>
+        )}
+      </Observer>
     );
   };
 

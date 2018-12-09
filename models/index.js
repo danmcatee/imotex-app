@@ -1,5 +1,7 @@
 import { CurrentUser } from './CurrentUser';
 import { types, getParent, destroy } from 'mobx-state-tree';
+import moment from 'moment';
+import 'moment/locale/de';
 
 import categories from '../assets/data/categories';
 import companies from '../assets/data/companies';
@@ -36,12 +38,13 @@ const Product = types
     id: types.identifier,
     name: types.maybe(types.string),
     desc: types.maybe(types.string),
-    image: '',
+    images: types.maybe(types.array(types.string)),
     isFavorite: false,
     fixed: false,
     sizes: types.maybe(types.array(types.string)),
     categories: types.array(types.reference(Category)),
     created: '',
+    due: '',
   })
   .views(self => {
     return {
@@ -54,6 +57,15 @@ const Product = types
     return {
       toggleFav() {
         self.isFavorite = !self.isFavorite;
+      },
+      addImage(path) {
+        self.images.push(path);
+      },
+      extend() {
+        moment.locale('de');
+        self.due = moment()
+          .add(7, 'd')
+          .format('L');
       },
     };
   });
@@ -81,6 +93,18 @@ const Company = types
           product =>
             product.categories.filter(category => category.id === cat).length
         );
+      },
+      getProducts() {
+        return self.products;
+      },
+      getProduct(id) {
+        return self.products.find(el => el.id === id);
+      },
+      getArchived() {
+        return self.products.filter(product => {
+          var due = moment(product.due, 'L');
+          return due.diff(moment(), 'd') < 0;
+        });
       },
     };
   })
