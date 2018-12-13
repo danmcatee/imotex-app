@@ -28,7 +28,7 @@ class CompanyRow extends Component {
         <View style={styles.nameContainer}>
           <Text style={styles.companyName}>{this.props.company.name}</Text>
         </View>
-        {this.props.all && (
+        {!!this.props.all && (
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {this.props.company.products.map(product => (
               <ProductLink key={product.id} product={product} />

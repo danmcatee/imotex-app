@@ -155,6 +155,11 @@ class ProductDetailScreen extends Component {
     const company = this.props.navigation.getParam('company');
     const companyId = product.id.slice(0, 3);
     const productPos = product.id.slice(-1);
+    const imgSource = {
+      source: productImgs[companyId][productPos],
+    };
+    if (product.images && product.images[0][0] === 'f')
+      imgSource.source = { uri: product.images[0] };
     return (
       <ScrollView
         contentContainerStyle={styles.container}
@@ -162,7 +167,7 @@ class ProductDetailScreen extends Component {
       >
         <View style={styles.imgContainer}>
           <Image
-            source={productImgs[companyId][productPos]}
+            source={imgSource.source}
             style={styles.mainImg}
             resizeMode="contain"
           />

@@ -37,11 +37,16 @@ class FavoritesScreen extends Component {
         back: 'FavHome',
       });
     };
+    const imgSource = {
+      source: productImgs[companyId][productPos],
+    };
+    if (item.images && item.images[0][0] === 'f')
+      imgSource.source = { uri: item.images[0] };
     return (
       <View style={{ paddingRight: 10, paddingBottom: 10 }}>
         <TouchableOpacity onPress={() => onPress(item)} style={{ flex: 1 }}>
           <Image
-            source={productImgs[companyId][productPos]}
+            source={imgSource.source}
             style={[
               styles.image,
               {

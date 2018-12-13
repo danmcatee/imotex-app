@@ -309,6 +309,8 @@ class UploadScreen extends Component {
               this.state.img3,
               this.state.img4,
             ]}
+            colors={this.state.colors}
+            sizes={this.state.sizes}
             name={this.state.name}
             desc={this.state.desc}
             add={this._handleAdd}

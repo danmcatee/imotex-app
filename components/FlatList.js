@@ -20,13 +20,18 @@ const List = ({ data, itemWidth, store }) => {
         back: 'CompanyOverview',
       });
     };
+    const imgSource = {
+      source: productImgs[companyId][productPos],
+    };
+    if (item.images && item.images[0][0] === 'f')
+      imgSource.source = { uri: item.images[0] };
     return (
       <Observer>
         {() => (
           <View style={{ paddingRight: 10, paddingBottom: 10 }}>
             <TouchableOpacity onPress={() => onPress(item)}>
               <Image
-                source={productImgs[companyId][productPos]}
+                source={imgSource.source}
                 style={[
                   styles.image,
                   {

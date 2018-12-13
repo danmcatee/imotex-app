@@ -21,11 +21,16 @@ const ProductLink = ({
       company: productStore.getCompany(companyId),
     });
   };
+  const imgSource = {
+    source: productImgs[companyId][productPos],
+  };
+  if (product.images && product.images[0][0] === 'f')
+    imgSource.source = { uri: product.images[0] };
   return (
     <View>
       <TouchableOpacity onPress={() => onPress(product)}>
         <Image
-          source={productImgs[companyId][productPos]}
+          source={imgSource.source}
           style={[
             {
               height: height ? height : 100,

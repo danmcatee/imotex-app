@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import Theme from '../constants/Theme';
+import ColorPicker from './ColorPicker';
 
 const UploadModal = ({
   modalVisible,
@@ -23,6 +24,8 @@ const UploadModal = ({
   getCategoryName,
   getCategory,
   collection,
+  colors,
+  sizes,
 }) => (
   <SafeAreaView>
     <View style={{ paddingHorizontal: 10 }}>
